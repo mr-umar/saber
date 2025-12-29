@@ -95,6 +95,12 @@ abstract class _SettingsStows {
     (AxisDirection value) => value.index,
     (int value) => AxisDirection.values[value],
   );
+
+  static final editorToolbarSize = TransformedStow(
+    stows.editorToolbarSize,
+    (ToolbarSize value) => value.index,
+    (int value) => ToolbarSize.values[value],
+  );
 }
 
 class _SettingsPageState extends State<SettingsPage> {
@@ -449,6 +455,18 @@ class _SettingsPageState extends State<SettingsPage> {
                               t.settings.axisDirections[direction.index],
                         ),
                       ),
+                  ],
+                  afterChange: (_) => setState(() {}),
+                ),
+                SettingsSelection(
+                  title: "Toolbar Size", // TODO: Add to strings.g.dart if needed
+                  icon: Icons.photo_size_select_small,
+                  pref: _SettingsStows.editorToolbarSize,
+                  optionsWidth: 80,
+                  options: const [
+                    ToggleButtonsOption(0, Text("Small")),
+                    ToggleButtonsOption(1, Text("Medium")),
+                    ToggleButtonsOption(2, Text("Large")),
                   ],
                   afterChange: (_) => setState(() {}),
                 ),

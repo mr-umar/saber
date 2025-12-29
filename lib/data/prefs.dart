@@ -130,6 +130,12 @@ class Stows {
     codec: const EnumCodec(AxisDirection.values),
     volatile: !_isOnMainIsolate,
   );
+  final editorToolbarSize = PlainStow(
+    'editorToolbarSize',
+    ToolbarSize.medium,
+    codec: const EnumCodec(ToolbarSize.values),
+    volatile: !_isOnMainIsolate,
+  );
   final editorToolbarShowInFullscreen = PlainStow(
     'editorToolbarShowInFullscreen',
     true,
@@ -334,6 +340,11 @@ class Stows {
         'lastAxisAlignedPanLock',
         false,
         volatile: !_isOnMainIsolate,
+      ),
+      lastHorizontalScrollLock = PlainStow(
+        'lastHorizontalScrollLock',
+        false,
+        volatile: !_isOnMainIsolate,
       );
 
   final recentFiles = PlainStow(
@@ -428,9 +439,12 @@ class TransformedStow<T_in, T_out> extends Stow<dynamic, T_out, dynamic> {
     return 'TransformedPref<$T_in, $T_out>(from ${parent.key}, $value)';
   }
 
+
   @override
   void dispose() {
     parent.removeListener(notifyListeners);
     super.dispose();
   }
 }
+
+enum ToolbarSize { small, medium, large }

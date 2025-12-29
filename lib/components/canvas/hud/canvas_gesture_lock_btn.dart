@@ -11,6 +11,8 @@ class CanvasGestureLockBtn extends StatelessWidget {
     required this.tooltip,
     this.icon,
     this.child,
+    this.iconSize = 24.0,
+    this.padding = const EdgeInsets.all(5),
   }) : assert(icon != null || child != null);
 
   final bool lock;
@@ -18,6 +20,8 @@ class CanvasGestureLockBtn extends StatelessWidget {
   final String tooltip;
   final IconData? icon;
   final Widget? child;
+  final double iconSize;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +31,20 @@ class CanvasGestureLockBtn extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: colorScheme.surface.withValues(alpha: 0.5),
-          borderRadius: .circular(15),
+          borderRadius: BorderRadius.circular(15),
         ),
-        padding: const .all(5),
+        padding: padding,
         child: Tooltip(
           message: tooltip,
           child:
               child ??
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
-                child: Icon(icon, color: colorScheme.onSurface),
+                child: Icon(
+                  icon,
+                  color: colorScheme.onSurface,
+                  size: iconSize,
+                ),
               ),
         ),
       ),

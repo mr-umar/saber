@@ -181,9 +181,15 @@ class _ToolbarState extends State<Toolbar> {
         stows.editorToolbarAlignment.value == AxisDirection.left ||
         stows.editorToolbarAlignment.value == AxisDirection.right;
 
+    final (iconSize, innerPadding, outerPadding) = switch (stows.editorToolbarSize.value) {
+      ToolbarSize.small => (14.0, const EdgeInsets.all(5.0), 3.0),
+      ToolbarSize.medium => (20.0, const EdgeInsets.all(8.0), 6.0),
+      ToolbarSize.large => (24.0, const EdgeInsets.all(10.0), 8.0),
+    };
+
     final buttonPadding = isToolbarVertical
-        ? Toolbar._buttonPaddingVertical
-        : Toolbar._buttonPaddingHorizontal;
+        ? EdgeInsets.symmetric(vertical: outerPadding)
+        : EdgeInsets.symmetric(horizontal: outerPadding);
 
     final currentColor = switch (widget.currentTool) {
       final Pen pen => pen.color,
@@ -343,7 +349,9 @@ class _ToolbarState extends State<Toolbar> {
                   }
                 },
                 padding: buttonPadding,
-                child: FaIcon(Pen.currentPen.icon, size: 16),
+                iconSize: iconSize,
+                innerPadding: innerPadding,
+                child: FaIcon(Pen.currentPen.icon, size: iconSize * 0.8),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.pens.pencil,
@@ -362,7 +370,9 @@ class _ToolbarState extends State<Toolbar> {
                   }
                 },
                 padding: buttonPadding,
-                child: const FaIcon(Pencil.pencilIcon, size: 16),
+                iconSize: iconSize,
+                innerPadding: innerPadding,
+                child: FaIcon(Pencil.pencilIcon, size: iconSize * 0.8),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.pens.highlighter,
@@ -381,7 +391,9 @@ class _ToolbarState extends State<Toolbar> {
                   }
                 },
                 padding: buttonPadding,
-                child: const FaIcon(Highlighter.highlighterIcon, size: 16),
+                iconSize: iconSize,
+                innerPadding: innerPadding,
+                child: FaIcon(Highlighter.highlighterIcon, size: iconSize * 0.8),
               ),
               ValueListenableBuilder(
                 valueListenable: showColorOptions,
@@ -392,14 +404,16 @@ class _ToolbarState extends State<Toolbar> {
                     enabled: !widget.readOnly,
                     onPressed: toggleColorOptions,
                     padding: buttonPadding,
+                    iconSize: iconSize,
+                    innerPadding: innerPadding,
                     child: child!,
                   );
                 },
                 child: currentColor == null
                     ? const Icon(Icons.palette)
                     : Container(
-                        width: 18,
-                        height: 18,
+                        width: iconSize * 0.9,
+                        height: iconSize * 0.9,
                         decoration: BoxDecoration(
                           color: currentColor
                               .withInversion(invert)
@@ -421,6 +435,8 @@ class _ToolbarState extends State<Toolbar> {
                   widget.setTool(Select.currentSelect);
                 },
                 padding: buttonPadding,
+                iconSize: iconSize,
+                innerPadding: innerPadding,
                 child: Icon(
                   CupertinoIcons.lasso,
                   shadows: !widget.readOnly
@@ -445,6 +461,8 @@ class _ToolbarState extends State<Toolbar> {
                   widget.setTool(LaserPointer.currentLaserPointer);
                 },
                 padding: buttonPadding,
+                iconSize: iconSize,
+                innerPadding: innerPadding,
                 child: const Icon(Symbols.stylus_laser_pointer),
               ),
               ToolbarIconButton(
@@ -453,13 +471,17 @@ class _ToolbarState extends State<Toolbar> {
                 enabled: !widget.readOnly,
                 onPressed: toggleEraser,
                 padding: buttonPadding,
-                child: const FaIcon(FontAwesomeIcons.eraser, size: 16),
+                iconSize: iconSize,
+                innerPadding: innerPadding,
+                child: FaIcon(FontAwesomeIcons.eraser, size: iconSize * 0.8),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.toolbar.photo,
                 enabled: !widget.readOnly,
                 onPressed: widget.pickPhoto,
                 padding: buttonPadding,
+                iconSize: iconSize,
+                innerPadding: innerPadding,
                 child: const AdaptiveIcon(
                   icon: Icons.photo,
                   cupertinoIcon: CupertinoIcons.photo,
@@ -471,6 +493,8 @@ class _ToolbarState extends State<Toolbar> {
                 enabled: !widget.readOnly,
                 onPressed: widget.toggleTextEditing,
                 padding: buttonPadding,
+                iconSize: iconSize,
+                innerPadding: innerPadding,
                 child: const AdaptiveIcon(
                   icon: Icons.text_fields,
                   cupertinoIcon: CupertinoIcons.text_cursor,
@@ -486,6 +510,8 @@ class _ToolbarState extends State<Toolbar> {
                       enabled: !widget.readOnly,
                       onPressed: widget.toggleFingerDrawing,
                       padding: buttonPadding,
+                      iconSize: iconSize,
+                      innerPadding: innerPadding,
                       child: const Icon(CupertinoIcons.hand_draw),
                     );
                   },
@@ -496,6 +522,8 @@ class _ToolbarState extends State<Toolbar> {
                 enabled: !widget.readOnly,
                 onPressed: toggleFullscreen,
                 padding: buttonPadding,
+                iconSize: iconSize,
+                innerPadding: innerPadding,
                 child: AdaptiveIcon(
                   icon: DynamicMaterialApp.isFullscreen
                       ? Icons.fullscreen_exit
@@ -513,6 +541,8 @@ class _ToolbarState extends State<Toolbar> {
                     enabled: !widget.readOnly && widget.isUndoPossible,
                     onPressed: widget.undo,
                     padding: buttonPadding,
+                    iconSize: iconSize,
+                    innerPadding: innerPadding,
                     child: const AdaptiveIcon(
                       icon: Icons.undo,
                       cupertinoIcon: CupertinoIcons.arrow_uturn_left,
@@ -523,6 +553,8 @@ class _ToolbarState extends State<Toolbar> {
                     enabled: !widget.readOnly && widget.isRedoPossible,
                     onPressed: widget.redo,
                     padding: buttonPadding,
+                    iconSize: iconSize,
+                    innerPadding: innerPadding,
                     child: const AdaptiveIcon(
                       icon: Icons.redo,
                       cupertinoIcon: CupertinoIcons.arrow_uturn_right,
@@ -539,6 +571,8 @@ class _ToolbarState extends State<Toolbar> {
                     enabled: !widget.readOnly,
                     onPressed: toggleExportBar,
                     padding: buttonPadding,
+                    iconSize: iconSize,
+                    innerPadding: innerPadding,
                     child: child!,
                   );
                 },

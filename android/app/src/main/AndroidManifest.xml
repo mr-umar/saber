@@ -16,8 +16,8 @@
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" tools:node="remove" />
 
-   <application
-        android:label="Saber"
+    <application
+        android:label="Fork Saber"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
@@ -131,7 +131,7 @@
 
        <provider
            android:name="com.superlist.super_native_extensions.DataProvider"
-           android:authorities="com.adilhanney.saber.SuperClipboardDataProvider"
+           android:authorities="com.adilhanney.saber.fork.SuperClipboardDataProvider"
            android:exported="true"
            android:grantUriPermissions="true" >
        </provider>

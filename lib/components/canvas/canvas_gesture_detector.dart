@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:keybinder/keybinder.dart';
 import 'package:saber/components/canvas/hud/canvas_hud.dart';
+import 'package:saber/components/canvas/hud/canvas_scrollbar.dart';
 import 'package:saber/components/canvas/interactive_canvas.dart';
 import 'package:saber/data/editor/page.dart';
 import 'package:saber/data/extensions/change_notifier_extensions.dart';
@@ -158,6 +159,14 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
   /// Whether panning is locked to being horizontal or vertical.
   /// Otherwise, panning can be done in any (i.e. diagonal) direction.
   late bool axisAlignedPanLock = stows.lastAxisAlignedPanLock.value;
+
+  /// Whether horizontal scrolling is locked (forcing vertical-only).
+  late bool horizontalScrollLock = stows.lastHorizontalScrollLock.value;
+
+  late ToolbarSize toolbarSize = stows.editorToolbarSize.value;
+
+  double? _lastScale;
+  double? _lastX;
 
   void zoomIn() => widget._transformationController.value =
       setZoom(
@@ -399,7 +408,36 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
         0,
         1,
       );
+      // Update local variables to match the new transform
+      // so the next check uses the corrected values
+      _lastScale = scale;
+      _lastX = widget._transformationController.value.getTranslation().x;
+    } else if (horizontalScrollLock) {
+      // Aggressive Horizontal Lock
+      // If scale hasn't changed (significantly), preventing X changes (panning).
+      // If scale HAS changed (zooming), we accept the X change to keep focal point natural.
+      
+      final prevScale = _lastScale ?? scale;
+      final prevX = _lastX ?? translation.x;
+      
+      if ((scale - prevScale).abs() < 0.001) {
+        // Pure panning (or stationary).
+        // If X changed, revert it.
+        if ((translation.x - prevX).abs() > 0.1) {
+           widget._transformationController.value.setTranslationRaw(
+             prevX,
+             translation.y,
+             translation.z
+           );
+           // We modified the matrix, so we don't update _lastX to the new (reverted) value
+           // explicitly here, but next call will see correct value.
+           return; 
+        }
+      }
     }
+    
+    _lastScale = scale;
+    _lastX = widget._transformationController.value.getTranslation().x;
   }
 
   /// Resets the zoom level to 1.0x
@@ -487,7 +525,9 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
                   minScale: zoomLockedValue ?? CanvasGestureDetector.kMinScale,
                   maxScale: zoomLockedValue ?? CanvasGestureDetector.kMaxScale,
                   panEnabled: !singleFingerPanLock,
-                  panAxis: axisAlignedPanLock ? PanAxis.aligned : PanAxis.free,
+                  panAxis: horizontalScrollLock
+                      ? PanAxis.vertical
+                      : (axisAlignedPanLock ? PanAxis.aligned : PanAxis.free),
 
                   interactionEndFrictionCoefficient:
                       InteractiveCanvasViewer.kDrag * 100,
@@ -542,8 +582,22 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
               this.axisAlignedPanLock = axisAlignedPanLock;
               stows.lastAxisAlignedPanLock.value = axisAlignedPanLock;
             }),
+            horizontalScrollLock: horizontalScrollLock,
+            setHorizontalScrollLock: (bool horizontalScrollLock) => setState(() {
+              this.horizontalScrollLock = horizontalScrollLock;
+              stows.lastHorizontalScrollLock.value = horizontalScrollLock;
+            }),
+            toolbarSize: toolbarSize,
           ),
         ),
+
+        if (containerBounds != const BoxConstraints())
+          CanvasScrollbar(
+            transformationController: widget._transformationController,
+            pages: widget.pages,
+            containerWidth: containerBounds.maxWidth,
+            containerHeight: containerBounds.maxHeight,
+          ),
       ],
     );
   }

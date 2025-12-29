@@ -5,6 +5,7 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:saber/components/canvas/hud/canvas_gesture_lock_btn.dart';
 import 'package:saber/components/canvas/hud/canvas_zoom_indicator.dart';
 import 'package:saber/data/extensions/matrix4_extensions.dart';
+import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
 
 class CanvasHud extends StatefulWidget {
@@ -18,8 +19,11 @@ class CanvasHud extends StatefulWidget {
     required this.setSingleFingerPanLock,
     required this.axisAlignedPanLock,
     required this.setAxisAlignedPanLock,
+    required this.horizontalScrollLock,
+    required this.setHorizontalScrollLock,
+    required this.toolbarSize,
   });
-
+  
   final TransformationController transformationController;
   final bool zoomLock;
   final ValueChanged<bool> setZoomLock;
@@ -28,6 +32,9 @@ class CanvasHud extends StatefulWidget {
   final ValueChanged<bool> setSingleFingerPanLock;
   final bool axisAlignedPanLock;
   final ValueChanged<bool> setAxisAlignedPanLock;
+  final bool horizontalScrollLock;
+  final ValueChanged<bool> setHorizontalScrollLock;
+  final ToolbarSize toolbarSize;
 
   @override
   State<CanvasHud> createState() => _CanvasHudState();
@@ -56,6 +63,12 @@ class _CanvasHudState extends State<CanvasHud> {
 
   @override
   Widget build(BuildContext context) {
+    final (iconSize, padding, spacing) = switch (widget.toolbarSize) {
+      ToolbarSize.small => (18.0, const EdgeInsets.all(4.0), 36.0),
+      ToolbarSize.medium => (24.0, const EdgeInsets.all(5.0), 40.0),
+      ToolbarSize.large => (30.0, const EdgeInsets.all(6.0), 48.0),
+    };
+
     return IgnorePointer(
       ignoring: opacity < 0.5,
       child: AnimatedOpacity(
@@ -73,10 +86,12 @@ class _CanvasHudState extends State<CanvasHud> {
                 tooltip: widget.zoomLock
                     ? t.editor.hud.unlockZoom
                     : t.editor.hud.lockZoom,
+                iconSize: iconSize,
+                padding: padding,
               ),
             ),
             Positioned(
-              top: 45,
+              top: 5 + spacing,
               left: 5,
               child: CanvasGestureLockBtn(
                 lock: widget.singleFingerPanLock,
@@ -85,10 +100,12 @@ class _CanvasHudState extends State<CanvasHud> {
                 tooltip: widget.singleFingerPanLock
                     ? t.editor.hud.unlockSingleFingerPan
                     : t.editor.hud.lockSingleFingerPan,
+                iconSize: iconSize,
+                padding: padding,
               ),
             ),
             Positioned(
-              top: 85,
+              top: 5 + spacing * 2,
               left: 5,
               child: CanvasGestureLockBtn(
                 lock: widget.axisAlignedPanLock,
@@ -96,11 +113,29 @@ class _CanvasHudState extends State<CanvasHud> {
                 tooltip: widget.axisAlignedPanLock
                     ? t.editor.hud.unlockAxisAlignedPan
                     : t.editor.hud.lockAxisAlignedPan,
+                iconSize: iconSize,
+                padding: padding,
                 child: AnimatedRotation(
                   duration: const Duration(milliseconds: 200),
                   turns: widget.axisAlignedPanLock ? 0 : 1 / 8,
-                  child: const Icon(Symbols.drag_pan),
+                  child: Icon(Symbols.drag_pan, size: iconSize),
                 ),
+              ),
+            ),
+            Positioned(
+              top: 5 + spacing * 3,
+              left: 5,
+              child: CanvasGestureLockBtn(
+                lock: widget.horizontalScrollLock,
+                setLock: widget.setHorizontalScrollLock,
+                tooltip: widget.horizontalScrollLock
+                    ? "Unlock Horizontal Scroll"
+                    : "Lock Horizontal Scroll",
+                icon: widget.horizontalScrollLock
+                    ? Icons.swap_vert
+                    : Icons.swap_horiz,
+                iconSize: iconSize,
+                padding: padding,
               ),
             ),
             Positioned(

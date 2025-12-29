@@ -1,4 +1,24 @@
+# Fork Saber
+This is a fork of the original Saber application, customized with the following additional features:
+
+- **Canvas Gesture Rejection**: Added a lock button to the HUD. When active, horizontal scrolling is disabled (vertical only) to prevent accidental panning while writing.
+- **Toolbar Size Options**: Added a setting to choose between Small, Medium, and Large toolbar sizes.
+- **Vertical Scrollbar**: Added a vertical scrollbar on the right side of the editor. Not draggable sadly. :(
+
+- **Rebranding**: Renamed to "Fork Saber" with a new application ID `com.adilhanney.saber.fork` to allow side-by-side installation with the original app.
+- **Provider Conflict Fix**: Updated `SuperClipboardDataProvider` authority to `com.adilhanney.saber.fork.SuperClipboardDataProvider` to prevent installation conflicts with the original Saber app.
+
+## APK
+You can find the latest compiled APK here:
+ **[Download Fork Saber APK](file:///home/umar/Documents/code/forksaber/saber/build/app/outputs/flutter-apk/app-release.apk)**
+
+This APK can be installed along with the original Saber app.
+
+If you need the builds for other devices, please use the source code to build them yourself.
+---
+
 # <img src="https://github.com/saber-notes/saber/raw/main/assets/icon/icon.png" width="30" height="30" alt="Logo"> Saber
+
 
 [<img src='https://github.com/saber-notes/saber/blob/main/assets_raw/badges/google-play-badge.svg'
     alt='Get it on Google Play'

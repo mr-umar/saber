@@ -8,6 +8,8 @@ class ToolbarIconButton extends StatelessWidget {
     this.enabled = true,
     required this.onPressed,
     required this.padding,
+    this.iconSize = 20,
+    this.innerPadding = const EdgeInsets.all(8),
     required this.child,
   });
 
@@ -17,6 +19,8 @@ class ToolbarIconButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   final EdgeInsets padding;
+  final double iconSize;
+  final EdgeInsets innerPadding;
   final Widget child;
 
   @override
@@ -42,8 +46,8 @@ class ToolbarIconButton extends StatelessWidget {
       backgroundColor: backgroundColor,
       iconColor: foregroundColor,
       foregroundColor: foregroundColor,
-      iconSize: const WidgetStatePropertyAll(20),
-      padding: const WidgetStatePropertyAll(EdgeInsets.all(8)),
+      iconSize: WidgetStatePropertyAll(iconSize),
+      padding: WidgetStatePropertyAll(innerPadding),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     );
 
