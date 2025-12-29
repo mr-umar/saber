@@ -10,7 +10,8 @@ This is a fork of the original Saber application, customized with the following 
 
 ## APK
 You can find the latest compiled APK here:
- **[Download Fork Saber APK](file:///home/umar/Documents/code/forksaber/saber/build/app/outputs/flutter-apk/app-release.apk)**
+ **[Download Fork Saber APK](build/app/outputs/flutter-apk/app-release.apk)**
+
 
 This APK can be installed along with the original Saber app.
 
