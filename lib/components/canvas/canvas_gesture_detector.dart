@@ -429,8 +429,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
              translation.y,
              translation.z
            );
-           // We modified the matrix, so we don't update _lastX to the new (reverted) value
-           // explicitly here, but next call will see correct value.
+           widget._transformationController.notifyListenersPlease();
            return; 
         }
       }

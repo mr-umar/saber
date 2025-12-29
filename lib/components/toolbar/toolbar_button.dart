@@ -49,16 +49,21 @@ class ToolbarIconButton extends StatelessWidget {
       iconSize: WidgetStatePropertyAll(iconSize),
       padding: WidgetStatePropertyAll(innerPadding),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      minimumSize: const WidgetStatePropertyAll(Size.zero),
     );
 
     return Padding(
       padding: padding,
-      child: IconButton.filled(
-        style: buttonStyle,
-        onPressed: (enabled) ? onPressed : null,
-        tooltip: tooltip,
-        isSelected: selected,
-        icon: child,
+      child: SizedBox(
+        width: iconSize + innerPadding.horizontal,
+        height: iconSize + innerPadding.vertical,
+        child: IconButton.filled(
+          style: buttonStyle,
+          onPressed: (enabled) ? onPressed : null,
+          tooltip: tooltip,
+          isSelected: selected,
+          icon: child,
+        ),
       ),
     );
   }

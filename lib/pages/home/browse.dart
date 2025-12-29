@@ -130,9 +130,22 @@ class _BrowsePageState extends State<BrowsePage> {
               pinned: true,
               scrolledUnderElevation: 1,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  t.home.titles.browse,
-                  style: TextStyle(color: colorScheme.onSurface),
+                title: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Unofficial Fork',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: colorScheme.onSurface.withValues(alpha: 0.6),
+                      ),
+                    ),
+                    Text(
+                      t.home.titles.browse,
+                      style: TextStyle(color: colorScheme.onSurface),
+                    ),
+                  ],
                 ),
                 centerTitle: false,
                 titlePadding: const EdgeInsetsDirectional.only(

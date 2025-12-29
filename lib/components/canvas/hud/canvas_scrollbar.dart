@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:saber/data/editor/page.dart';
+import 'package:saber/data/extensions/change_notifier_extensions.dart';
 import 'package:saber/data/extensions/matrix4_extensions.dart';
 import 'package:saber/pages/editor/editor.dart';
 
@@ -143,6 +144,7 @@ class _CanvasScrollbarState extends State<CanvasScrollbar> {
           );
           
           widget.transformationController.value = currentMatrix;
+          widget.transformationController.notifyListenersPlease();
         },
         child: Container(
           color: Colors.transparent, // Hit test invisible

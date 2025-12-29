@@ -3,7 +3,7 @@ This is a fork of the original Saber application, customized with the following 
 
 - **Canvas Gesture Rejection**: Added a lock button to the HUD. When active, horizontal scrolling is disabled (vertical only) to prevent accidental panning while writing.
 - **Toolbar Size Options**: Added a setting to choose between Small, Medium, and Large toolbar sizes.
-- **Vertical Scrollbar**: Added a vertical scrollbar on the right side of the editor. Not draggable sadly. :(
+- **Vertical Scrollbar**: Added a draggable vertical scrollbar on the right side of the editor for quick navigation.
 
 - **Rebranding**: Renamed to "Fork Saber" with a new application ID `com.adilhanney.saber.fork` to allow side-by-side installation with the original app.
 - **Provider Conflict Fix**: Updated `SuperClipboardDataProvider` authority to `com.adilhanney.saber.fork.SuperClipboardDataProvider` to prevent installation conflicts with the original Saber app.

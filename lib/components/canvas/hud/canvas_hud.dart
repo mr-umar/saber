@@ -64,7 +64,7 @@ class _CanvasHudState extends State<CanvasHud> {
   @override
   Widget build(BuildContext context) {
     final (iconSize, padding, spacing) = switch (widget.toolbarSize) {
-      ToolbarSize.small => (18.0, const EdgeInsets.all(4.0), 36.0),
+      ToolbarSize.small => (16.0, const EdgeInsets.all(3.0), 32.0),
       ToolbarSize.medium => (24.0, const EdgeInsets.all(5.0), 40.0),
       ToolbarSize.large => (30.0, const EdgeInsets.all(6.0), 48.0),
     };
