@@ -9,13 +9,9 @@ This is a fork of the original Saber application, customized with the following 
 - **Provider Conflict Fix**: Updated `SuperClipboardDataProvider` authority to `com.adilhanney.saber.fork.SuperClipboardDataProvider` to prevent installation conflicts with the original Saber app.
 
 ## APK
-You can find the latest compiled APK here:
- **[Download Fork Saber APK](build/app/outputs/flutter-apk/app-release.apk)**
 
+If you need the builds, please use the source code to build them yourself.
 
-This APK can be installed along with the original Saber app.
-
-If you need the builds for other devices, please use the source code to build them yourself.
 ---
 
 # <img src="https://github.com/saber-notes/saber/raw/main/assets/icon/icon.png" width="30" height="30" alt="Logo"> Saber
