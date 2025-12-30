@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:saber/components/navbar/responsive_navbar.dart';
+import 'package:saber/components/home/unofficial_fork_header.dart';
 import 'package:saber/components/settings/app_info.dart';
 import 'package:saber/components/settings/nextcloud_profile.dart';
 import 'package:saber/components/settings/settings_button.dart';
@@ -173,13 +174,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Unofficial Fork',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: colorScheme.onSurface.withValues(alpha: 0.6),
-                      ),
-                    ),
+                    const UnofficialForkHeader(),
                     Text(
                       t.home.titles.settings,
                       style: TextStyle(color: colorScheme.onSurface),

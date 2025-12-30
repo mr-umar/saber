@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:saber/components/home/unofficial_fork_header.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/version.dart';
@@ -39,9 +40,16 @@ class AppInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => _showAboutDialog(context),
-      child: ValueListenableBuilder(
-        valueListenable: stows.locale,
-        builder: (context, _, _) => Text(info),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ValueListenableBuilder(
+            valueListenable: stows.locale,
+            builder: (context, _, _) => Text(info),
+          ),
+          const SizedBox(height: 4),
+          const UnofficialForkHeader(),
+        ],
       ),
     );
   }

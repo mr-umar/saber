@@ -7,6 +7,7 @@ This is a fork of the original Saber (v1.29.2) application, customized with the 
 - **Rebranding**: Renamed to "Fork Saber" with a new application ID `com.adilhanney.saber.fork` to allow side-by-side installation with the original app.
 - **Provider conflict fix**: Updated `SuperClipboardDataProvider` authority to `com.adilhanney.saber.fork.SuperClipboardDataProvider` to prevent installation conflicts with the original Saber app.
 - **Privacy Enforcement**: Hard-disabled Sentry telemetry by replacing the official DSN with a fake address, ensuring no data is ever sent to external diagnostic servers.
+- **Date and time**: The previews now show the last modificaction date and time. 
 
 ## Installers
 

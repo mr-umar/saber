@@ -58,7 +58,7 @@ dependencies:
 
   vector_math: ^2.1.2
 
-  intl: any
+  intl: ^0.20.2
 
   crypto: ^3.0.2
   encrypt: ^5.0.1

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saber Fork</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --border: #30363d;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0 40px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            margin-top: 16px;
+            font-weight: 400;
+        }
+
+        .notice {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 14px 20px;
+            border-radius: 6px;
+            margin: 30px auto;
+            max-width: 700px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .notice a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .notice a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-group {
+            margin-top: 40px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #238636;
+            color: #ffffff;
+            border: 1px solid rgba(240,246,252,0.1);
+        }
+        .btn-primary:hover { 
+            background-color: #2ea043; 
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+        .btn-outline:hover {
+            border-color: var(--text-muted);
+            background-color: var(--bg-secondary);
+        }
+
+        .hero-image-container {
+            margin: 60px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 60px rgba(0,0,0,0.6);
+        }
+
+        .hero-image {
+            width: 100%;
+            display: block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin: 60px 0;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: 8px;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--text-muted);
+        }
+
+        .card h3 {
+            margin: 0 0 12px 0;
+            color: var(--accent);
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 50px 0;
+            margin-top: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        footer a { 
+            color: var(--accent); 
+            text-decoration: none; 
+        }
+        footer a:hover { 
+            text-decoration: underline; 
+        }
+
+        code {
+            background: rgba(110,118,129,0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Saber Fork</h1>
+        <p class="subtitle">Practical improvements for handwritten notes</p>
+
+        <div class="notice">
+            Fork of <a href="https://github.com/saber-notes/saber/">Saber Notes</a> by Adil Hanney and contributors
+        </div>
+
+        <div class="btn-group">
+            <a href="https://github.com/mr-umar/saber/releases/latest" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"></path><path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"></path></svg>
+                Download APK
+            </a>
+            <a href="https://github.com/mr-umar/saber" class="btn btn-outline">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+                Source Code
+            </a>
+        </div>
+
+
+<p style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;">
+    Looking builds for other OS? 
+    <a href="https://github.com/mr-umar/saber" style="color: var(--accent); text-decoration: none;">Build them yourself</a> from source. I only provide the Android APK.
+</p>
+
+    </header>
+
+    <div class="hero-image-container">
+        <img src="features.jpg" alt="Feature overview" class="hero-image">
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Canvas Lock</h3>
+            <p>Lock button in HUD disables horizontal panning. Prevents accidental page movement when writing with zoom enabled.</p>
+        </div>
+        <div class="card">
+            <h3>Toolbar Sizing</h3>
+            <p>Configurable toolbar sizes: Small, Medium, Large. Adjust UI elements to match your screen and preferences.</p>
+        </div>
+        <div class="card">
+            <h3>Vertical Scrollbar</h3>
+            <p>Draggable scrollbar on the right side. Navigate through long notes quickly without repeated swipe gestures.</p>
+        </div>
+        <div class="card">
+            <h3>Telemetry Disabled</h3>
+            <p>Sentry telemetry completely disabled. Fake DSN replaces official endpoint. Zero external data transmission.</p>
+        </div>
+        <div class="card">
+            <h3>Parallel Installation</h3>
+            <p>Package ID changed to <code>com.adilhanney.saber.fork</code>. Install alongside original Saber without conflicts.</p>
+        </div>
+        <div class="card">
+            <h3>Timestamp Previews</h3>
+            <p>Note previews display last modification date and time. Easier to identify recent changes at a glance.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL v3</a><br>
+            Original project: <a href="https://github.com/saber-notes/saber">github.com/saber-notes/saber</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

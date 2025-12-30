@@ -182,7 +182,7 @@ class _ToolbarState extends State<Toolbar> {
         stows.editorToolbarAlignment.value == AxisDirection.right;
 
     final (iconSize, innerPadding, outerPadding, wrapPadding, wrapSpacing) = switch (stows.editorToolbarSize.value) {
-      ToolbarSize.small => (14.0, const EdgeInsets.all(4.0), 2.0, 4.0, 4.0),
+      ToolbarSize.small => (16.0, const EdgeInsets.all(5.0), 3.0, 5.0, 5.0),
       ToolbarSize.medium => (20.0, const EdgeInsets.all(8.0), 6.0, 8.0, 8.0),
       ToolbarSize.large => (24.0, const EdgeInsets.all(10.0), 8.0, 10.0, 10.0),
     };
