@@ -1,5 +1,5 @@
 # Fork Saber
-This is a fork of the original Saber application, customized with the following additional features:
+This is a fork of the original Saber (v1.29.2) application, customized with the following additional features:
 
 - **Canvas gesture rejection**: Added a lock button to the HUD. When active, horizontal scrolling is disabled (vertical only) to prevent accidental panning while writing with zoom.
 - **Toolbar size options**: Added a setting to choose between Small, Medium, and Large toolbar sizes.
