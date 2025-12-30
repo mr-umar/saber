@@ -551,8 +551,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   icon: Icons.save,
                   pref: stows.autosaveDelay,
                   options: [
-                    const ToggleButtonsOption(5000, Text('5s')),
-                    const ToggleButtonsOption(10000, Text('10s')),
+                    const ToggleButtonsOption(2000, Text('2s')),
+                    const ToggleButtonsOption(6000, Text('6s')),
                     ToggleButtonsOption(-1, Text(t.settings.autosaveDisabled)),
                   ],
                 ),

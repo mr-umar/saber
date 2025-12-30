@@ -15,13 +15,13 @@ home:
     settings: Configuración
   tooltips: 
     newNote: Crear nota
-    showUpdateDialog: Mostrar cuadro de diálogo de actualizaciónes
+    showUpdateDialog: Mostrar cuadro de diálogo de actualizaciones
     exportNote: Exportar nota
   create: 
     newNote: Nueva nota
     importNote: Importar nota
   welcome: Te damos la bienvenida a Saber
-  invalidFormat: El archivo que seleccionaste no es válido. Por favor, selecciona un archivo .sbn, .sbn2, .sba or .pdf.
+  invalidFormat: El archivo que seleccionaste no es válido. Por favor, selecciona un archivo .sbn, .sbn2, .sba o .pdf.
   noFiles: No se ha encontrado ninguna nota
   createNewNote: Presiona el botón + para crear una nueva nota
   backFolder: Volver a la carpeta anterior
@@ -30,14 +30,14 @@ home:
     folderName: Nombre de la carpeta
     create: Crear
     folderNameEmpty: El nombre de la carpeta no puede estar vacío
-    folderNameContainsSlash: El nombre de la carpeta no puede contener una barra vertical
+    folderNameContainsSlash: El nombre de la carpeta no puede contener una barra (/)
     folderNameExists: Ya existe una carpeta con este nombre
   renameNote: 
     renameNote: Renombrar nota
     noteName: Nombre de la nota
     rename: Renombrar
     noteNameEmpty: El nombre de la nota no puede estar vacío
-    noteNameContainsSlash: El nombre de la nota no puede contener una barra vertical
+    noteNameContainsSlash: El nombre de la nota no puede contener una barra (/)
     noteNameExists: Ya existe una nota con este nombre
   moveNote: 
     moveNote: Mover nota
@@ -72,14 +72,14 @@ sentry:
     answers: 
       yes(OUTDATED): Sí
       later(OUTDATED): Pregúntame más tarde
-    title(OUTDATED): Ayudar a mejorar el sable?
+    title(OUTDATED): ¿Ayudar a mejorar Saber?
 settings: 
   prefCategories: 
     general: General
     writing: Escritura
     editor: Editor
     advanced: Avanzado
-    performance(OUTDATED): Actuación
+    performance(OUTDATED): Rendimiento
   prefLabels: 
     locale: Idioma de la aplicación
     appTheme: Tema de la aplicación
@@ -105,7 +105,7 @@ settings:
     printPageIndicators: Indicadores de página de impresión
     sentry(OUTDATED): Informes de errores
     autosave(OUTDATED): Auto-Save
-    simplifiedHomeLayout(OUTDATED): Disposición simplificada de la casa
+    simplifiedHomeLayout(OUTDATED): Diseño simplificado de inicio
     customDataDir(OUTDATED): Directorio de datos personalizado
     autoStraightenLines(OUTDATED): Líneas de enderezamiento automático
     shapeRecognitionDelay(OUTDATED): Retraso en el reconocimiento de formas
@@ -161,7 +161,7 @@ settings:
   autosaveDisabled(OUTDATED): Nunca
   shapeRecognitionDisabled(OUTDATED): Nunca
   openDataDir(OUTDATED): Abrir carpeta Saber
-  resyncEverything(OUTDATED): Resync todo
+  resyncEverything(OUTDATED): Resincronizar todo
 logs: 
   useTheApp(OUTDATED): Los registros aparecerán aquí mientras usa la aplicación
   logs(OUTDATED): Registros
@@ -235,7 +235,7 @@ profile:
     - 
       q: ¿Cómo puedo eliminar mi cuenta?
       a: |-
-        Pincha en el botón "@:profile.quickLinks.deleteAccount", e inicia sesión si es necesario.
+        Presiona el botón "@:profile.quickLinks.deleteAccount", e inicia sesión si es necesario.
         Si estás usando el servidor oficial de Saber, tu cuenta se eliminará después de un periodo de una semana. Puedes contactar conmigo en la dirección adilhanney@disroot.org durante este tiempo para cancelar la eliminación.
         Si estás usando un servidor de terceros, puede ser que la opción de eliminar no exista: necesitas consultar la política de privacidad del servidor para más información.
   quotaUsage(OUTDATED): Estás usando $used de $total ($percent%)
@@ -265,7 +265,7 @@ editor:
     undo: Deshacer
     redo: Rehacer
     export: Exportar (Ctrl Shift S)
-    exportAs: "Exportar cómo:"
+    exportAs: "Exportar como:"
     fullscreen: Pantalla completa (F11)
   pens: 
     ballpointPen: Bolígrafo
@@ -288,7 +288,7 @@ editor:
     white: Blanco
     red: Rojo
     green: Verde
-    cyan: Cyan
+    cyan: Cian
     blue: Azul
     yellow: Amarillo
     purple: Morado
@@ -332,7 +332,7 @@ editor:
       college: Rayado universitario
       collegeRtl: Rayado universitario (inverso)
       lined: Rayado
-      grid: Cuadrículado
+      grid: Cuadriculado
       dots: Punteado
       staffs: Pentagrama
       tablature: Tablatura

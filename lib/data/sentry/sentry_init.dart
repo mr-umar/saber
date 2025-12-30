@@ -48,7 +48,7 @@ FutureOr<void> initSentry(FutureOr<void> Function() appRunner) async {
 @visibleForTesting
 void populateSentryOptions(SentryFlutterOptions options) {
   options.dsn =
-      'https://66937061678418b37c7b29cbfa1a0105@o4509780708229120.ingest.de.sentry.io/4509780710654032';
+      'https://disabled@fork.saber.invalid/0';
   options.addIntegration(LoggingIntegration());
   options.environment = kDebugMode ? 'debug' : 'release';
   // Filter data before sending
