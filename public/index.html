@@ -6,253 +6,382 @@
     <title>Saber Fork</title>
     <style>
         :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #58a6ff;
-            --border: #30363d;
+            /* Saber Brand Colors */
+            --primary: #ffd32e;
+            --primary-hover: #e5bc20;
+            --text-main: #24292f;
+            --text-muted: #57606a;
+            --bg-body: #ffffff;
+            --bg-surface: #f6f8fa;
+            --border: #d0d7de;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
         }
 
         * { box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: var(--bg-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: var(--bg-body);
             color: var(--text-main);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
+        /* Header Section */
         header {
             text-align: center;
-            padding: 80px 0 40px;
+            padding: 80px 0 60px;
+            background: radial-gradient(circle at top, #fffdf5 0%, #ffffff 100%);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
         h1 {
             font-size: 3.5rem;
-            margin: 0;
-            font-weight: 700;
-            letter-spacing: -0.03em;
+            margin: 16px 0 8px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #24292f 0%, #57606a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             color: var(--text-muted);
-            margin-top: 16px;
+            margin: 0 0 32px;
             font-weight: 400;
         }
 
-        .notice {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            padding: 14px 20px;
-            border-radius: 6px;
-            margin: 30px auto;
-            max-width: 700px;
+        .fork-badge {
+            display: inline-block;
+            background: #fff8c5;
+            color: #4a3b00;
+            border: 1px solid rgba(255, 211, 46, 0.5);
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 0.95rem;
-            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 40px;
         }
 
-        .notice a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .notice a:hover {
+        .fork-badge a {
+            color: inherit;
             text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-decoration-color: rgba(74, 59, 0, 0.2);
+        }
+        
+        .fork-badge a:hover {
+            text-decoration-color: rgba(74, 59, 0, 1);
         }
 
+        /* Buttons */
         .btn-group {
-            margin-top: 40px;
             display: flex;
             gap: 16px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 24px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            border-radius: 6px;
-            font-weight: 600;
+            gap: 12px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
             text-decoration: none;
-            transition: all 0.15s;
-            font-size: 1rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         .btn-primary {
-            background-color: #238636;
-            color: #ffffff;
-            border: 1px solid rgba(240,246,252,0.1);
+            background-color: var(--primary);
+            color: #24292f;
+            border: 1px solid transparent;
         }
-        .btn-primary:hover { 
-            background-color: #2ea043; 
-            transform: translateY(-1px);
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
         }
 
         .btn-outline {
-            background-color: transparent;
+            background-color: white;
             border: 1px solid var(--border);
             color: var(--text-main);
         }
+
         .btn-outline:hover {
             border-color: var(--text-muted);
-            background-color: var(--bg-secondary);
+            background-color: var(--bg-surface);
+        }
+
+        /* Hero Image */
+        .hero-section {
+            padding: 0 24px;
+            margin-bottom: 80px;
         }
 
         .hero-image-container {
-            margin: 60px 0;
-            border-radius: 12px;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
-            box-shadow: 0 0 60px rgba(0,0,0,0.6);
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image-container:hover {
+            transform: scale(1.01);
         }
 
         .hero-image {
             width: 100%;
             display: block;
+            height: auto;
+        }
+
+        /* Features Grid */
+        .features-section {
+            background-color: var(--bg-surface);
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin: 60px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
         }
 
         .card {
-            background: var(--bg-secondary);
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
-            padding: 28px;
-            border-radius: 8px;
-            transition: border-color 0.2s;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .card:hover {
-            border-color: var(--text-muted);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            background: #fff8c5;
+            color: #4a3b00;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
         .card h3 {
             margin: 0 0 12px 0;
-            color: var(--accent);
-            font-size: 1.15rem;
-            font-weight: 600;
+            font-size: 1.25rem;
+            font-weight: 700;
         }
 
         .card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
             margin: 0;
+            line-height: 1.6;
         }
 
+        .code-snippet {
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+            background: var(--bg-surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        /* Footer */
         footer {
-            border-top: 1px solid var(--border);
-            padding: 50px 0;
-            margin-top: 80px;
+            padding: 60px 0;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
         }
 
         footer a { 
-            color: var(--accent); 
-            text-decoration: none; 
+            color: var(--text-main); 
+            text-decoration: underline;
+            text-decoration-color: var(--primary);
+            text-decoration-thickness: 2px;
+            font-weight: 500;
         }
-        footer a:hover { 
-            text-decoration: underline; 
-        }
-
-        code {
-            background: rgba(110,118,129,0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-            font-size: 0.9em;
+        
+        footer a:hover {
+            color: black;
+            background-color: var(--primary);
+            text-decoration: none;
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .subtitle { font-size: 1.1rem; }
-            .grid { grid-template-columns: 1fr; }
+            .subtitle { font-size: 1.2rem; }
+            .hero-section { padding: 0; }
+            .card { padding: 24px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
     <header>
-        <h1>Saber Fork</h1>
-        <p class="subtitle">Practical improvements for handwritten notes</p>
+        <div class="container">
+            <div class="logo-area">
+                <!-- Saber Icon SVG -->
+                <svg class="logo-icon" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="yellowPaper" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#faca22" />
+                            <stop offset="100%" stop-color="#ffd32e" />
+                        </linearGradient>
+                    </defs>
+                    <path fill="url(#yellowPaper)" d="M 0 15 V 785 C 0 800 0 800 15 800 L 170 800 C 354 799 352 799 389 794 C 440 786 450 781 488 744 C 644 592 674 563 692 547 C 759 484 770 470 780 441 C 791 406 798 340 799 267 L 800 15 C 800 0 800 0 785 0 H 15 C 0 0 0 0 0 15" fill-rule="evenodd"/>
+                    <path fill="#32322e" d="M373.5 166.315C314.203 173.271 259.358 207.553 238.489 250.709 216.721 295.724 234.009 331.53 286.788 350.748 299.873 355.513 320.41 359.952 348 363.981 430.34 376.004 482.805 397.669 519.16 434.658 555.706 471.843 558.106 512.588 525.853 548.325 492.77 584.98 414.044 599.149 351.507 579.703 323.394 570.962 281.872 540.551 266.597 517.515 261.093 509.214 250.222 498.549 246.394 497.693 244.802 497.337 242.912 496.861 242.194 496.634 238.108 495.346 232.784 500.03 230.942 506.534 229.891 510.245 233.12 526.259 236.098 532.105 245.467 550.493 268.191 572.093 298.5 591.422 339.801 617.76 378.322 625.888 439.5 621.174 467.873 618.987 502.245 608.07 523 594.651 544.631 579.414 544.631 578.971 561.172 558.633 620.575 474.027 551.522 375.27 408.5 340.285 389.445 335.623 378.108 333.522 348 329.072 298.831 321.806 272.46 311.035 265.12 295.221 256.465 276.577 277.122 243.69 310.025 223.73 348.438 200.427 400.752 192.731 430 206.08 434.125 207.963 438.625 209.816 440 210.198 444.33 211.403 458.395 218.442 460.903 220.659 463.746 223.174 466.823 223.419 467.664 221.198 468.411 219.227 460.168 200.78 454.874 192.576 447.722 181.493 426.319 168.527 411.307 166.185 403.014 164.891 385.11 164.953 373.5 166.315" fill-rule="evenodd"/>
+                </svg>
+            </div>
+            
+            <h1>Saber Fork</h1>
+            <p class="subtitle">Practical improvements for handwritten notes</p>
 
-        <div class="notice">
-            Fork of <a href="https://github.com/saber-notes/saber/">Saber Notes</a> by Adil Hanney and contributors
+            <div class="fork-badge">
+                Fork of <a href="https://github.com/saber-notes/saber/">Saber Notes</a> by Adil Hanney and contributors
+            </div>
+
+            <div class="btn-group">
+                <a href="https://github.com/mr-umar/saber/releases/latest" class="btn btn-primary">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+                    Download APK
+                </a>
+                <a href="https://github.com/mr-umar/saber" class="btn btn-outline">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+                    Source Code
+                </a>
+            </div>
+
+            <p style="margin-top: 24px; color: var(--text-muted); font-size: 0.9rem;">
+                Looking for builds for other OS? <a href="https://github.com/mr-umar/saber" style="color: var(--text-main); text-decoration: underline;">Build them yourself</a> or download from the <a href="https://github.com/saber-notes/saber/releases/latest" style="color: var(--text-main); text-decoration: underline;">original repository</a>.
+            </p>
         </div>
-
-        <div class="btn-group">
-            <a href="https://github.com/mr-umar/saber/releases/latest" class="btn btn-primary">
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"></path><path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"></path></svg>
-                Download APK
-            </a>
-            <a href="https://github.com/mr-umar/saber" class="btn btn-outline">
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
-                Source Code
-            </a>
-        </div>
-
-
-<p style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;">
-    Looking builds for other OS? 
-    <a href="https://github.com/mr-umar/saber" style="color: var(--accent); text-decoration: none;">Build them yourself</a> from source. I only provide the Android APK.
-</p>
-
     </header>
 
-    <div class="hero-image-container">
-        <img src="features.jpg" alt="Feature overview" class="hero-image">
+    <div class="hero-section">
+        <div class="hero-image-container">
+            <img src="https://raw.githubusercontent.com/mr-umar/saber/refs/heads/main/public/features.jpg" alt="Feature overview" class="hero-image">
+        </div>
     </div>
 
-    <div class="grid">
-        <div class="card">
-            <h3>Canvas Lock</h3>
-            <p>Lock button in HUD disables horizontal panning. Prevents accidental page movement when writing with zoom enabled.</p>
+    <section class="features-section">
+        <div class="container">
+            <div class="grid">
+                <div class="card">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3>Canvas Lock</h3>
+                    <p>Lock button in HUD disables horizontal panning. Prevents accidental page movement when writing with zoom enabled.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+                    </div>
+                    <h3>Toolbar Sizing</h3>
+                    <p>Configurable toolbar sizes: Small, Medium, Large. Adjust UI elements to match your screen and preferences.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 17l4 4 4-4"></path><path d="M12 3v18"></path><path d="M8 7l4-4 4 4"></path></svg>
+                    </div>
+                    <h3>Vertical Scrollbar</h3>
+                    <p>Draggable scrollbar on the right side. Navigate through long notes quickly without repeated swipe gestures.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="4.05" y1="11" x2="4.05" y2="11.01"></line><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+                    </div>
+                    <h3>Telemetry Disabled</h3>
+                    <p>Sentry telemetry completely disabled. Fake DSN replaces official endpoint. Zero external data transmission.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </div>
+                    <h3>Parallel Installation</h3>
+                    <p>Package ID changed to <span class="code-snippet">com.adilhanney.saber.fork</span>. Install alongside original Saber without conflicts.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    </div>
+                    <h3>Other Improvements</h3>
+                    <p>And other GUI and usage improvements.</p>
+                </div>
+            </div>
         </div>
-        <div class="card">
-            <h3>Toolbar Sizing</h3>
-            <p>Configurable toolbar sizes: Small, Medium, Large. Adjust UI elements to match your screen and preferences.</p>
-        </div>
-        <div class="card">
-            <h3>Vertical Scrollbar</h3>
-            <p>Draggable scrollbar on the right side. Navigate through long notes quickly without repeated swipe gestures.</p>
-        </div>
-        <div class="card">
-            <h3>Telemetry Disabled</h3>
-            <p>Sentry telemetry completely disabled. Fake DSN replaces official endpoint. Zero external data transmission.</p>
-        </div>
-        <div class="card">
-            <h3>Parallel Installation</h3>
-            <p>Package ID changed to <code>com.adilhanney.saber.fork</code>. Install alongside original Saber without conflicts.</p>
-        </div>
-    </div>
+    </section>
 
     <footer>
-        <p>
-            Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL v3</a><br>
-            Original project: <a href="https://github.com/saber-notes/saber">github.com/saber-notes/saber</a>
-        </p>
+        <div class="container">
+            <p style="margin-bottom: 24px;">
+                Want to suggest something or contact me? Email <a href="mailto:umar@umarmohammad.xyz" style="color: var(--text-main); text-decoration: underline;">umar@umarmohammad.xyz</a>
+            </p>
+            <p>
+                Base code and icon by <a href="https://github.com/saber-notes/saber/graphs/contributors">Adil Hanney and contributors</a>.<br>
+                This is a fork, not the original project. Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL v3</a>.<br>
+                Original project: <a href="https://github.com/saber-notes/saber">github.com/saber-notes/saber</a>
+            </p>
+        </div>
     </footer>
-</div>
 
 </body>
 </html>
-
-
-
