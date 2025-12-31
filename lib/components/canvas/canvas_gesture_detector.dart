@@ -472,6 +472,8 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     }
     widget.updatePointerData(event.kind, pressure);
 
+    _hoverPosition.value = null;
+
     if (isStylus &&
         stows.autoDisableFingerDrawingWhenStylusDetected.value &&
         // Don't change if the user has a fixed value for finger drawing
@@ -481,6 +483,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
   }
 
   var stylusButtonWasPressed = false;
+  final ValueNotifier<Offset?> _hoverPosition = ValueNotifier(null);
 
   void _listenerPointerHoverEvent(PointerEvent event) {
     if (event.kind != PointerDeviceKind.stylus) return;
@@ -489,8 +492,10 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     // so these are used to detect when hovering ends
     if (event.synthesized) {
       widget.onHoveringEnd();
+      _hoverPosition.value = null;
     } else {
       widget.onHovering();
+      _hoverPosition.value = event.localPosition;
       if (stylusButtonWasPressed != (event.buttons == kPrimaryStylusButton)) {
         stylusButtonWasPressed = event.buttons == kPrimaryStylusButton;
         widget.onStylusButtonChanged(stylusButtonWasPressed);
@@ -502,6 +507,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     widget.updatePointerData(event.kind, null);
     stylusButtonWasPressed = false;
     widget.onStylusButtonChanged(false);
+    _hoverPosition.value = null;
   }
 
   @override
@@ -597,6 +603,32 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
             containerWidth: containerBounds.maxWidth,
             containerHeight: containerBounds.maxHeight,
           ),
+        ValueListenableBuilder<Offset?>(
+          valueListenable: _hoverPosition,
+          builder: (context, position, child) {
+            if (position == null) return const SizedBox.shrink();
+            return AnimatedPositioned(
+              duration: const Duration(milliseconds: 16),
+              curve: Curves.linear,
+              left: position.dx - 2.5,
+              top: position.dy - 2.5,
+              child: IgnorePointer(
+                child: Container(
+                  width: 5,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.surface,
+                      width: 1,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ],
     );
   }
@@ -610,6 +642,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     widget._transformationController.removeListener(onTransformChanged);
     widget._transformationController.dispose();
     _removeKeybindings();
+    _hoverPosition.dispose();
     super.dispose();
   }
 

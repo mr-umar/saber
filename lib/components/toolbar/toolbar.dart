@@ -183,7 +183,7 @@ class _ToolbarState extends State<Toolbar> {
 
     final (iconSize, innerPadding, outerPadding, wrapPadding, wrapSpacing) = switch (stows.editorToolbarSize.value) {
       ToolbarSize.small => (16.0, const EdgeInsets.all(5.0), 3.0, 5.0, 5.0),
-      ToolbarSize.medium => (20.0, const EdgeInsets.all(8.0), 6.0, 8.0, 8.0),
+      ToolbarSize.medium => (18.0, const EdgeInsets.all(6.5), 4.5, 6.5, 6.5),
       ToolbarSize.large => (24.0, const EdgeInsets.all(10.0), 8.0, 10.0, 10.0),
     };
 
