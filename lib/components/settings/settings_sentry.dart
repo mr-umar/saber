@@ -8,45 +8,42 @@ class SettingsSentryConsent extends StatelessWidget {
   const SettingsSentryConsent({super.key});
 
   String _getSubtitle() {
-    final isActive = isSentryEnabled;
-    if (isActive) {
-      final willStayActive = stows.sentryConsent.value == .granted;
-      return willStayActive
-          ? t.settings.prefDescriptions.sentry.active
-          : t.settings.prefDescriptions.sentry.activeUntilRestart;
-    } else {
-      final willStayInactive = stows.sentryConsent.value != .granted;
-      return willStayInactive
-          ? t.settings.prefDescriptions.sentry.inactive
-          : t.settings.prefDescriptions.sentry.inactiveUntilRestart;
-    }
+    // In this fork, Sentry is hard-disabled
+    return t.settings.prefDescriptions.sentry.inactive;
   }
 
   @override
   Widget build(BuildContext context) {
     final title = t.settings.prefLabels.sentry;
-    return ValueListenableBuilder(
-      valueListenable: stows.sentryConsent,
-      builder: (context, consent, child) {
-        final subtitle = _getSubtitle();
-        return ListTile(
-          contentPadding: const .symmetric(vertical: 4, horizontal: 16),
-          leading: const Icon(Icons.bug_report),
-          title: Text(
-            title,
-            style: TextStyle(
-              fontSize: 18,
-              fontStyle:
-                  stows.sentryConsent.value != stows.sentryConsent.defaultValue
-                  ? FontStyle.italic
-                  : null,
+    final subtitle = _getSubtitle();
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+      leading: const Icon(Icons.bug_report),
+      title: Text(title, style: const TextStyle(fontSize: 18)),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(subtitle, style: const TextStyle(fontSize: 13)),
+          const SizedBox(height: 4),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.errorContainer,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              t.settings.prefDescriptions.sentry.inactive.toUpperCase(),
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onErrorContainer,
+              ),
             ),
           ),
-          subtitle: Text(subtitle, style: const TextStyle(fontSize: 13)),
-          onTap: () => SentryConsentDialog.show(context),
-          onLongPress: () => SentryConsentDialog.show(context),
-        );
-      },
+        ],
+      ),
+      onTap: null, // Disable interaction
+      enabled: false, // Visually indicate it's disabled
     );
   }
 }

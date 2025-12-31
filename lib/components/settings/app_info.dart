@@ -65,6 +65,16 @@ class AppInfo extends StatelessWidget {
     applicationLegalese: t.appInfo.licenseNotice(buildYear: buildYear),
     children: [
       const SizedBox(height: 10),
+      Text(
+        'This version is a modification of the original.',
+        style: Theme.of(context).textTheme.bodyMedium,
+        textAlign: TextAlign.center,
+      ),
+      TextButton(
+        onPressed: () => launchUrl(Uri.parse('https://github.com/mr-umar/saber')),
+        child: const Text('View fork on GitHub'),
+      ),
+      const SizedBox(height: 10),
       if (!Platform.isIOS && !Platform.isMacOS)
         // Apple rejected the app for having donations not through the App Store
         TextButton(

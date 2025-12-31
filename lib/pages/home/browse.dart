@@ -217,6 +217,7 @@ class _BrowsePageState extends State<BrowsePage> {
       floatingActionButton: NewNoteButton(
         cupertino: platform.isCupertino,
         path: path,
+        onCreateFolder: findChildrenOfPath,
       ),
       persistentFooterButtons: selectedFiles.value.isEmpty
           ? null

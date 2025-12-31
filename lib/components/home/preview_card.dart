@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:saber/components/canvas/_stroke.dart';
 import 'package:saber/components/canvas/inner_canvas.dart';
 import 'package:saber/components/canvas/invert_widget.dart';
@@ -35,7 +34,6 @@ class PreviewCard extends StatefulWidget {
 class _PreviewCardState extends State<PreviewCard> {
   final expanded = ValueNotifier(false);
   final thumbnail = _ThumbnailState();
-  DateTime? _lastModified;
 
   @override
   void initState() {
@@ -44,7 +42,6 @@ class _PreviewCardState extends State<PreviewCard> {
     );
 
     expanded.value = widget.selected;
-    _updateLastModified();
     super.initState();
   }
 
@@ -73,20 +70,8 @@ class _PreviewCardState extends State<PreviewCard> {
     } else if (event.type == .write) {
       thumbnail.image?.evict();
       thumbnail.markAsChanged();
-      _updateLastModified();
     } else {
       throw Exception('Unknown file operation type: ${event.type}');
-    }
-  }
-
-  void _updateLastModified() {
-    final file = FileManager.getFile(widget.filePath);
-    if (file.existsSync()) {
-      if (mounted) {
-        setState(() {
-          _lastModified = file.lastModifiedSync();
-        });
-      }
     }
   }
 
@@ -189,28 +174,12 @@ class _PreviewCardState extends State<PreviewCard> {
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      widget.filePath.substring(
-                        widget.filePath.lastIndexOf('/') + 1,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (_lastModified != null)
-                      Text(
-                        DateFormat.yMMMd().add_jm().format(_lastModified!),
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          fontSize: 10,
-                          color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                  ],
+                child: Text(
+                  widget.filePath.substring(
+                    widget.filePath.lastIndexOf('/') + 1,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),

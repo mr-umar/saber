@@ -39,7 +39,7 @@ class GridFolders extends StatelessWidget {
     /// The cards that come before the actual folders
     final extraCards = <_FolderCardType>[
       if (!isAtRoot) .backFolder,
-      .newFolder,
+      // .newFolder, // Moved to FAB
     ];
 
     return SliverPadding(

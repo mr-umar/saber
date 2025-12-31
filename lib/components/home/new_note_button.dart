@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:go_router/go_router.dart';
@@ -9,11 +10,19 @@ import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
 
+import 'new_folder_dialog.dart';
+
 class NewNoteButton extends StatefulWidget {
-  const NewNoteButton({super.key, required this.cupertino, this.path});
+  const NewNoteButton({
+    super.key,
+    required this.cupertino,
+    this.path,
+    this.onCreateFolder,
+  });
 
   final bool cupertino;
   final String? path;
+  final VoidCallback? onCreateFolder;
 
   @override
   State<NewNoteButton> createState() => _NewNoteButtonState();
@@ -124,6 +133,29 @@ class _NewNoteButtonState extends State<NewNoteButton> {
               }
               throw 'Invalid file type';
             }
+          },
+        ),
+        // Folder creation should be available in root (path == null or empty) and subfolders
+        SpeedDialChild(
+          child: const Icon(Icons.create_new_folder),
+          label: t.home.newFolder.newFolder,
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => NewFolderDialog(
+                createFolder: (folderName) async {
+                  // If path is null or empty, we are at root, so just use /folderName
+                  final basePath = (widget.path == null || widget.path!.isEmpty) ? '' : widget.path;
+                  final folderPath = '$basePath/$folderName';
+                  await FileManager.createFolder(folderPath);
+                  widget.onCreateFolder?.call();
+                },
+                doesFolderExist: (folderName) {
+                  final basePath = (widget.path == null || widget.path!.isEmpty) ? '' : widget.path;
+                  return FileManager.isDirectory('$basePath/$folderName');
+                },
+              ),
+            );
           },
         ),
       ],
