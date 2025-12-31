@@ -205,8 +205,7 @@ class _PreviewCardState extends State<PreviewCard> {
                         DateFormat.yMMMd().add_jm().format(_lastModified!),
                         style: theme.textTheme.bodySmall?.copyWith(
                           fontSize: 10,
-                          color: theme.textTheme.bodySmall?.color
-                              ?.withValues(alpha: 0.7),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
