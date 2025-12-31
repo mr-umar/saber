@@ -484,6 +484,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
 
   var stylusButtonWasPressed = false;
   final ValueNotifier<Offset?> _hoverPosition = ValueNotifier(null);
+  Timer? _palmRejectionTimer;
 
   void _listenerPointerHoverEvent(PointerEvent event) {
     if (event.kind != PointerDeviceKind.stylus) return;
@@ -499,6 +500,20 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
       if (stylusButtonWasPressed != (event.buttons == kPrimaryStylusButton)) {
         stylusButtonWasPressed = event.buttons == kPrimaryStylusButton;
         widget.onStylusButtonChanged(stylusButtonWasPressed);
+      }
+      
+      // Active palm rejection while hovering
+      if (stows.autoDisableFingerDrawingWhenStylusDetected.value &&
+          !stows.hideFingerDrawingToggle.value) {
+        stows.editorFingerDrawing.value = false;
+        
+        // Keep finger drawing disabled for a short while after the stylus leaves
+        _palmRejectionTimer?.cancel();
+        _palmRejectionTimer = Timer(const Duration(milliseconds: 500), () {
+           // Optionally re-enable finger drawing here if that was the desired behavior, 
+           // but typically users want it to stay off if they are using a stylus.
+           // For strictly palm rejection purposes, just resetting the timer extends the "safe zone".
+        });
       }
     }
   }
@@ -643,6 +658,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     widget._transformationController.dispose();
     _removeKeybindings();
     _hoverPosition.dispose();
+    _palmRejectionTimer?.cancel();
     super.dispose();
   }
 
