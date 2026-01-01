@@ -106,90 +106,124 @@ class _InnerCanvasState extends State<InnerCanvas> {
         : null;
 
     return RepaintBoundary(
-      child: CustomPaint(
-        painter: CanvasBackgroundPainter(
-          invert: invert,
-          backgroundColor: () {
-            if (page.backgroundImage != null) {
-              return Colors.white;
-            } else {
-              return backgroundColor;
-            }
-          }(),
-          backgroundPattern: () {
-            if (page.backgroundImage != null) {
-              return CanvasBackgroundPattern.none;
-            } else {
-              return widget.coreInfo.backgroundPattern;
-            }
-          }(),
-          lineHeight: widget.coreInfo.lineHeight,
-          lineThickness: widget.coreInfo.lineThickness,
-          primaryColor: colorScheme.primary,
-          secondaryColor: colorScheme.secondary,
-        ),
-        foregroundPainter: CanvasPainter(
-          repaint: widget.redrawPageListenable,
-          invert: invert,
-          strokes: page.strokes,
-          laserStrokes: page.laserStrokes,
-          currentStroke: widget.currentStroke,
-          currentSelection: widget.currentSelection,
-          primaryColor: colorScheme.primary,
-          page: page,
-          showPageIndicator:
-              !widget.isPreview &&
-              (!widget.isPrint || stows.printPageIndicators.value),
-          pageIndex: widget.pageIndex,
-          totalPages: widget.coreInfo.pages.length,
-          currentScale: widget.currentScale,
-          defaultTextStyle: theme.textTheme.bodyMedium!,
-        ),
-        isComplex: true,
-        willChange: true,
-        child: SizedBox(
-          width: widget.width,
-          height: widget.height,
-          child: DeferredPointerHandler(
-            child: Stack(
-              children: [
-                if (page.backgroundImage != null)
-                  CanvasImage(
-                    filePath: widget.coreInfo.filePath,
-                    image: page.backgroundImage!,
-                    pageSize: Size(widget.width, widget.height),
-                    setAsBackground: null,
-                    isBackground: true,
-                    readOnly: true,
-                  ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  width: widget.width,
-                  height: widget.height,
-                  child: IgnorePointer(
-                    ignoring: widget.coreInfo.readOnly || !widget.textEditing,
-                    child: quillEditor,
+      child: Stack(
+        children: [
+          // Background and completed strokes - only repaints when strokes list changes
+          RepaintBoundary(
+            child: CustomPaint(
+              painter: CanvasBackgroundPainter(
+                invert: invert,
+                backgroundColor: () {
+                  if (page.backgroundImage != null) {
+                    return Colors.white;
+                  } else {
+                    return backgroundColor;
+                  }
+                }(),
+                backgroundPattern: () {
+                  if (page.backgroundImage != null) {
+                    return CanvasBackgroundPattern.none;
+                  } else {
+                    return widget.coreInfo.backgroundPattern;
+                  }
+                }(),
+                lineHeight: widget.coreInfo.lineHeight,
+                lineThickness: widget.coreInfo.lineThickness,
+                primaryColor: colorScheme.primary,
+                secondaryColor: colorScheme.secondary,
+              ),
+              foregroundPainter: CanvasPainter(
+                repaint: widget.redrawPageListenable,
+                invert: invert,
+                strokes: page.strokes,
+                laserStrokes: page.laserStrokes,
+                currentStroke: null, // No current stroke in background layer
+                currentSelection: widget.currentSelection,
+                primaryColor: colorScheme.primary,
+                page: page,
+                showPageIndicator:
+                    !widget.isPreview &&
+                    (!widget.isPrint || stows.printPageIndicators.value),
+                pageIndex: widget.pageIndex,
+                totalPages: widget.coreInfo.pages.length,
+                currentScale: widget.currentScale,
+                defaultTextStyle: theme.textTheme.bodyMedium!,
+              ),
+              isComplex: true,
+              willChange: false, // Background doesn't change during drawing
+              child: SizedBox(
+                width: widget.width,
+                height: widget.height,
+                child: DeferredPointerHandler(
+                  child: Stack(
+                    children: [
+                      if (page.backgroundImage != null)
+                        CanvasImage(
+                          filePath: widget.coreInfo.filePath,
+                          image: page.backgroundImage!,
+                          pageSize: Size(widget.width, widget.height),
+                          setAsBackground: null,
+                          isBackground: true,
+                          readOnly: true,
+                        ),
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        width: widget.width,
+                        height: widget.height,
+                        child: IgnorePointer(
+                          ignoring: widget.coreInfo.readOnly || !widget.textEditing,
+                          child: quillEditor,
+                        ),
+                      ),
+                      for (int i = 0; i < page.images.length; i++)
+                        CanvasImage(
+                          filePath: widget.coreInfo.filePath,
+                          image: page.images[i],
+                          pageSize: Size(widget.width, widget.height),
+                          setAsBackground: widget.setAsBackground,
+                          readOnly:
+                              widget.coreInfo.readOnly || !widget.currentToolIsSelect,
+                          selected:
+                              widget.currentSelection?.images.contains(
+                                page.images[i],
+                              ) ??
+                              false,
+                        ),
+                    ],
                   ),
                 ),
-                for (int i = 0; i < page.images.length; i++)
-                  CanvasImage(
-                    filePath: widget.coreInfo.filePath,
-                    image: page.images[i],
-                    pageSize: Size(widget.width, widget.height),
-                    setAsBackground: widget.setAsBackground,
-                    readOnly:
-                        widget.coreInfo.readOnly || !widget.currentToolIsSelect,
-                    selected:
-                        widget.currentSelection?.images.contains(
-                          page.images[i],
-                        ) ??
-                        false,
-                  ),
-              ],
+              ),
             ),
           ),
-        ),
+          // Current stroke layer - repaints frequently during drawing
+          if (widget.currentStroke != null)
+            RepaintBoundary(
+              child: CustomPaint(
+                painter: CanvasPainter(
+                  repaint: widget.redrawPageListenable,
+                  invert: invert,
+                  strokes: const [], // No completed strokes in this layer
+                  laserStrokes: const [],
+                  currentStroke: widget.currentStroke,
+                  currentSelection: null, // Selection drawn in background
+                  primaryColor: colorScheme.primary,
+                  page: page,
+                  showPageIndicator: false, // Only in background
+                  pageIndex: widget.pageIndex,
+                  totalPages: widget.coreInfo.pages.length,
+                  currentScale: widget.currentScale,
+                  defaultTextStyle: theme.textTheme.bodyMedium!,
+                ),
+                isComplex: false,
+                willChange: true, // Current stroke changes frequently
+                child: SizedBox(
+                  width: widget.width,
+                  height: widget.height,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }

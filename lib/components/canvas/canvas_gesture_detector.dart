@@ -10,6 +10,14 @@ import 'package:keybinder/keybinder.dart';
 import 'package:saber/components/canvas/hud/canvas_hud.dart';
 import 'package:saber/components/canvas/hud/canvas_scrollbar.dart';
 import 'package:saber/components/canvas/interactive_canvas.dart';
+import 'package:saber/data/tools/eraser.dart';
+import 'package:saber/data/tools/highlighter.dart';
+import 'package:saber/data/tools/laser_pointer.dart';
+import 'package:saber/data/tools/pen.dart';
+import 'package:saber/data/tools/pencil.dart';
+import 'package:saber/data/tools/select.dart';
+import 'package:saber/data/tools/shape_pen.dart';
+import 'package:saber/data/tools/_tool.dart';
 import 'package:saber/data/editor/page.dart';
 import 'package:saber/data/extensions/change_notifier_extensions.dart';
 import 'package:saber/data/extensions/matrix4_extensions.dart';
@@ -37,11 +45,14 @@ class CanvasGestureDetector extends StatefulWidget {
     required this.pageBuilder,
     required this.placeholderPageBuilder,
     required this.isTextEditing,
+    required this.currentTool,
     TransformationController? transformationController,
   }) : _transformationController =
            transformationController ?? TransformationController();
 
   final String filePath;
+
+  final Tool currentTool;
 
   final bool Function(ScaleStartDetails scaleDetails) isDrawGesture;
   final ValueChanged<ScaleEndDetails>? onInteractionEnd;
@@ -472,7 +483,16 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     }
     widget.updatePointerData(event.kind, pressure);
 
-    _hoverPosition.value = null;
+    if (isStylus) {
+      if (widget.currentTool is! Eraser) {
+        _hoverPosition.value = null;
+        _isDrawing = true;
+        _showHoverTimer?.cancel();
+      } else {
+        // keep hover visible when erasing
+        _hoverPosition.value = event.localPosition;
+      }
+    }
 
     if (isStylus &&
         stows.autoDisableFingerDrawingWhenStylusDetected.value &&
@@ -485,6 +505,8 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
   var stylusButtonWasPressed = false;
   final ValueNotifier<Offset?> _hoverPosition = ValueNotifier(null);
   Timer? _palmRejectionTimer;
+  Timer? _showHoverTimer;
+  bool _isDrawing = false;
 
   void _listenerPointerHoverEvent(PointerEvent event) {
     if (event.kind != PointerDeviceKind.stylus) return;
@@ -494,9 +516,21 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     if (event.synthesized) {
       widget.onHoveringEnd();
       _hoverPosition.value = null;
+      _showHoverTimer?.cancel();
     } else {
       widget.onHovering();
-      _hoverPosition.value = event.localPosition;
+
+      if (!_isDrawing || widget.currentTool is Eraser) {
+        _hoverPosition.value = event.localPosition;
+      } else {
+        // If we were drawing, delay showing the hover pointer
+        _showHoverTimer?.cancel();
+        _showHoverTimer = Timer(const Duration(seconds: 1), () {
+          _isDrawing = false;
+          _hoverPosition.value = event.localPosition;
+        });
+      }
+
       if (stylusButtonWasPressed != (event.buttons == kPrimaryStylusButton)) {
         stylusButtonWasPressed = event.buttons == kPrimaryStylusButton;
         widget.onStylusButtonChanged(stylusButtonWasPressed);
@@ -522,7 +556,25 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     widget.updatePointerData(event.kind, null);
     stylusButtonWasPressed = false;
     widget.onStylusButtonChanged(false);
-    _hoverPosition.value = null;
+    
+    if (widget.currentTool is! Eraser) {
+      _hoverPosition.value = null;
+    } else {
+      _hoverPosition.value = event.localPosition;
+    }
+    
+    // Mark that we just finished a stroke (if it was a stylus stroke)
+    if (event.kind == PointerDeviceKind.stylus || 
+        event.kind == PointerDeviceKind.invertedStylus) {
+      if (widget.currentTool is! Eraser) {
+        _isDrawing = true;
+        // Restart the timer to show the pointer after 1 second of inactivity
+        _showHoverTimer?.cancel();
+        _showHoverTimer = Timer(const Duration(seconds: 1), () {
+          _isDrawing = false;
+        });
+      }
+    }
   }
 
   @override
@@ -554,7 +606,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
 
                   // we need a non-zero boundary margin so we can zoom out
                   // past the size of the page (for minScale < 1)
-                  boundaryMargin: .symmetric(
+                  boundaryMargin: EdgeInsets.symmetric(
                     vertical: 0,
                     horizontal: screenSize.width * 2,
                   ),
@@ -622,21 +674,37 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
           valueListenable: _hoverPosition,
           builder: (context, position, child) {
             if (position == null) return const SizedBox.shrink();
+            
+            final color = switch (widget.currentTool) {
+              final Pen pen => pen.color,
+              final Highlighter highlighter => highlighter.color,
+              final ShapePen shapePen => shapePen.color,
+              final LaserPointer _ => LaserPointer.outerColor,
+              _ => Theme.of(context).colorScheme.onSurface,
+            };
+
+            final isEraser = widget.currentTool is Eraser;
+            final size = isEraser ? 18.0 : 7.0;
+            final isDark = Theme.of(context).brightness == Brightness.dark;
+            final borderColor = isDark ? const Color(0xFF000000) : const Color(0xFFFFFFFF);
+
             return AnimatedPositioned(
               duration: const Duration(milliseconds: 16),
               curve: Curves.linear,
-              left: position.dx - 2.5,
-              top: position.dy - 2.5,
+              left: position.dx - size / 2,
+              top: position.dy - size / 2,
               child: IgnorePointer(
                 child: Container(
-                  width: 5,
-                  height: 5,
+                  width: size,
+                  height: size,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
-                    shape: BoxShape.circle,
+                    color: isEraser 
+                      ? Theme.of(context).colorScheme.onSurface.withOpacity(0.3)
+                      : color.withOpacity(0.5),
+                    shape: isEraser ? BoxShape.rectangle : BoxShape.circle,
                     border: Border.all(
-                      color: Theme.of(context).colorScheme.surface,
-                      width: 1,
+                      color: borderColor,
+                      width: 1.5,
                     ),
                   ),
                 ),
@@ -659,6 +727,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
     _removeKeybindings();
     _hoverPosition.dispose();
     _palmRejectionTimer?.cancel();
+    _showHoverTimer?.cancel();
     super.dispose();
   }
 

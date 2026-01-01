@@ -4,6 +4,9 @@ This is a fork of the original Saber (v1.29.2) application, customized with the 
 - **Canvas gesture rejection**: Added a lock button to the HUD. When active, horizontal scrolling is disabled (vertical only) to prevent accidental panning while writing with zoom.
 - **Toolbar size options**: Added a setting to choose between Small, Medium, and Large toolbar sizes.
 - **Vertical scrollbar**: Added a draggable vertical scrollbar on the right side of the editor for quick navigation.
+- **Stylus pointer indicator**: Visual pointer shows stylus position when hovering. Color matches selected pen color, square shape for eraser. Automatically hides while writing and reappears after 1 second of inactivity.
+- **Enhanced palm rejection**: Improved palm rejection that activates when stylus is detected near screen (hover), preventing accidental touches while writing.
+- **Performance optimizations**: Separated current stroke rendering from background strokes using RepaintBoundary layers. Uses low-quality paths during drawing for smoother performance, high-quality when complete. Optimized repaint logic to reduce unnecessary redraws.
 - **Rebranding**: Renamed to "Fork Saber" with a new application ID `com.adilhanney.saber.fork` to allow side-by-side installation with the original app.
 - **Provider conflict fix**: Updated `SuperClipboardDataProvider` authority to `com.adilhanney.saber.fork.SuperClipboardDataProvider` to prevent installation conflicts with the original Saber app.
 - **Privacy Enforcement**: Hard-disabled Sentry telemetry by replacing the official DSN with a fake address, ensuring no data is ever sent to external diagnostic servers.

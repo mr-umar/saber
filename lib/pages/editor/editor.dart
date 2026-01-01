@@ -1373,6 +1373,7 @@ class EditorState extends State<Editor> {
       initialPageIndex: coreInfo.initialPageIndex,
       pageBuilder: pageBuilder,
       isTextEditing: () => currentTool == Tool.textEditing,
+      currentTool: currentTool,
       placeholderPageBuilder: (BuildContext context, int pageIndex) {
         return Canvas(
           path: coreInfo.filePath,

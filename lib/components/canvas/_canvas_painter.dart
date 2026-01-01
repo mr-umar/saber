@@ -60,13 +60,21 @@ class CanvasPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CanvasPainter oldDelegate) {
-    return false ||
-        // Current stroke is being drawn, so always repaint if present
-        (currentStroke != null || oldDelegate.currentStroke != null) ||
-        // Laser strokes are always fading out, so always repaint if present
-        (laserStrokes.isNotEmpty || oldDelegate.laserStrokes.isNotEmpty) ||
-        // Check for any other changes
-        invert != oldDelegate.invert ||
+    // Only repaint if current stroke changed (position, points, etc.)
+    if (currentStroke != oldDelegate.currentStroke) {
+      // If both are null, no change
+      if (currentStroke == null || oldDelegate.currentStroke == null) return true;
+      // If stroke identity changed or length changed, repaint
+      if (currentStroke!.length != oldDelegate.currentStroke!.length) return true;
+      // If stroke completion status changed, repaint
+      if (currentStroke!.options.isComplete != oldDelegate.currentStroke!.options.isComplete) return true;
+    }
+    
+    // Laser strokes are always fading out, so always repaint if present
+    if (laserStrokes.isNotEmpty || oldDelegate.laserStrokes.isNotEmpty) return true;
+    
+    // Check for any other changes
+    return invert != oldDelegate.invert ||
         strokes.length != oldDelegate.strokes.length ||
         currentSelection != oldDelegate.currentSelection ||
         primaryColor != oldDelegate.primaryColor ||
@@ -174,8 +182,11 @@ class CanvasPainter extends CustomPainter {
       paint.maskFilter = _getPencilMaskFilter(currentStroke!.options.size);
     }
 
-    // Current stroke always uses high quality
-    canvas.drawPath(currentStroke!.highQualityPath, paint);
+    // Use low quality during drawing for better performance, high quality only when complete
+    final path = currentStroke!.options.isComplete 
+        ? currentStroke!.highQualityPath 
+        : _selectPath(currentStroke!);
+    canvas.drawPath(path, paint);
   }
 
   void _drawLaserStroke(Canvas canvas, LaserStroke stroke) {
