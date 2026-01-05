@@ -141,6 +141,11 @@ class Stows {
     true,
     volatile: !_isOnMainIsolate,
   );
+  final editorStylusPointerEnabled = PlainStow(
+    'editorStylusPointerEnabled',
+    true,
+    volatile: !_isOnMainIsolate,
+  );
   final editorFingerDrawing = PlainStow(
     'editorFingerDrawing',
     true,

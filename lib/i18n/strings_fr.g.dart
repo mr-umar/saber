@@ -393,6 +393,7 @@ class _TranslationsSettingsPrefLabelsFr extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Autoriser les connexions non sécurisées';
 	@override String get editorToolbarAlignment => 'Position de la barre d\'outils';
 	@override String get editorToolbarShowInFullscreen => 'Afficher la barre d\'outils en mode plein écran';
+	@override String get editorStylusPointerEnabled => 'Pointeur du stylet';
 	@override String get editorAutoInvert => 'Inverser les couleurs en mode sombre';
 	@override String get preferGreyscale => 'Préférer les nuances de gris';
 	@override String get maxImageSize => 'Taille d\'image maximum';
@@ -420,6 +421,7 @@ class _TranslationsSettingsPrefDescriptionsFr extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'La fonte Atkinson Hyperlegible améliore la lisibilité pour les personnes malvoyantes';
+	@override String get editorStylusPointerEnabled => 'Afficher un pointeur visuel lorsque le stylet est proche de l\'écran';
 	@override String get allowInsecureConnections => '(Déconseillé) Autoriser Saber à se connecter à des serveurs dont les certificats sont auto-signés/non-sécurisé';
 	@override String get preferGreyscale => 'Pour les couleurs de stylos proposées';
 	@override String get autoClearWhiteboardOnExit => 'Il restera synchronisé avec vos autres appareils';

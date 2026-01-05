@@ -92,6 +92,7 @@ settings:
     allowInsecureConnections: Permitir conexiones inseguras
     editorToolbarAlignment: Alineación de la barra de herramientas del editor
     editorToolbarShowInFullscreen: Mostrar la barra de herramientas del editor en el modo de pantalla completa
+    editorStylusPointerEnabled: Puntero del stylus
     editorAutoInvert: Invertir notas en el modo oscuro
     preferGreyscale: Preferir colores en escala de grises
     maxImageSize: Tamaño máximo de la imagen

@@ -390,6 +390,7 @@ class _TranslationsSettingsPrefLabelsHu extends TranslationsSettingsPrefLabelsEn
 	@override String get shouldCheckForUpdates => 'Automatikusan ellenőrzi a Saber frissítéseket';
 	@override String get editorToolbarAlignment => 'A szerkesztő eszköztár igazítása';
 	@override String get editorToolbarShowInFullscreen => 'A szerkesztő eszköztár megjelenítése teljes képernyős módban';
+	@override String get editorStylusPointerEnabled => 'Stylus mutató';
 	@override String get editorAutoInvert => 'Jegyzetek színének felcserélése sötét módban';
 	@override String get preferGreyscale => 'Szürkeárnyalatos színek előnyben részesítése';
 	@override String get maxImageSize => 'Maximális képméret';
@@ -420,6 +421,7 @@ class _TranslationsSettingsPrefDescriptionsHu extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'Az Atkinson Hyperlegible növeli az olvashatóságot a gyengén látók számára';
+	@override String get editorStylusPointerEnabled => 'Vizuális mutató megjelenítése, amikor a stylus közel van a képernyőhöz';
 	@override String get preferGreyscale => 'E-tinta kijelzőkhöz';
 	@override String get autoClearWhiteboardOnExit => 'Továbbra is szinkronizálva lesz a többi eszközzel';
 	@override String get maxImageSize => 'Az ennél nagyobb képek tömörítve lesznek';

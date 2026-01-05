@@ -393,6 +393,7 @@ class _TranslationsSettingsPrefLabelsHe extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'אפשר חיבורים לא מאובטחים';
 	@override String get editorToolbarAlignment => 'מיקום סרגל הכלים';
 	@override String get editorToolbarShowInFullscreen => 'הצג את סרגל הכלים במצב מסך מלא';
+	@override String get editorStylusPointerEnabled => 'מצביע עט';
 	@override String get editorAutoInvert => 'הפוך הערות במצב כהה';
 	@override String get preferGreyscale => 'העדיפו צבעי גווני אפור';
 	@override String get maxImageSize => 'גודל תמונה מקסימלי';
@@ -420,6 +421,7 @@ class _TranslationsSettingsPrefDescriptionsHe extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'מגביר את הקריאות למשתמשים עם ראייה לקויה';
+	@override String get editorStylusPointerEnabled => 'הצג מצביע חזותי כאשר העט קרוב למסך';
 	@override String get allowInsecureConnections => '(לא מומלץ) אפשר לסבר להתחבר לשרתים עם אישורים חתומים/לא מהימנים';
 	@override String get preferGreyscale => 'עבור תצוגות דיו אלקטרוני';
 	@override String get autoClearWhiteboardOnExit => 'מנקה את לוח הציור לאחר היציאה מהאפליקציה';

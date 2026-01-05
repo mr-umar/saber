@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsAr extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'السماح بالاتصالات غير الآمنة';
 	@override String get editorToolbarAlignment => 'محاذاة شريط أدوات المحرر';
 	@override String get editorToolbarShowInFullscreen => 'أظهر شريط أدوات المحرر في وضع ملء الشاشة';
+	@override String get editorStylusPointerEnabled => 'مؤشر القلم';
 	@override String get editorAutoInvert => 'اقلب الملاحظات في الوضع المظلم';
 	@override String get preferGreyscale => 'تفضيل الألوان الرمادية';
 	@override String get maxImageSize => 'الحجم الأقصى للصورة';
@@ -422,6 +423,7 @@ class _TranslationsSettingsPrefDescriptionsAr extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'يزيد Atkinson Hyperlegible من وضوح الرؤية للقراء الذين يعانون من ضعف في الرؤية';
+	@override String get editorStylusPointerEnabled => 'إظهار مؤشر مرئي عندما يكون القلم بالقرب من الشاشة';
 	@override String get allowInsecureConnections => '(غير موصى به) بالاتصال بالخوادم بشهادات غير موثوقة/موقعة ذاتيًا Saber السماح لـ';
 	@override String get preferGreyscale => 'لشاشات الحبر الإلكتروني';
 	@override String get autoClearWhiteboardOnExit => 'ستظل متزامنة مع أجهزتك الأخرى';

@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: Allow insecure connections
     editorToolbarAlignment: Toolbar position
     editorToolbarShowInFullscreen: Show the toolbar in fullscreen mode
+    editorStylusPointerEnabled: Stylus pointer
     editorAutoInvert: Invert notes in dark mode
     preferGreyscale: Prefer greyscale colors
     maxImageSize: Maximum image size

@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsRu extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Разрешить небезопасные соединения';
 	@override String get editorToolbarAlignment => 'Панель инструментов редактора';
 	@override String get editorToolbarShowInFullscreen => 'Показывать инструменты в полноэкранном режиме';
+	@override String get editorStylusPointerEnabled => 'Указатель стилуса';
 	@override String get editorAutoInvert => 'Инвертировать заметки в тёмном режиме';
 	@override String get preferGreyscale => 'Предпочтение оттенкам серого';
 	@override String get maxImageSize => 'Макс. размер изображения';
@@ -422,6 +423,7 @@ class _TranslationsSettingsPrefDescriptionsRu extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'Шрифт Atkinson Hyperlegible повышает разборчивость для читателей с плохим зрением';
+	@override String get editorStylusPointerEnabled => 'Показывать визуальный указатель, когда стилус находится рядом с экраном';
 	@override String get allowInsecureConnections => '(Не рекомендуется) Разрешить Saber подключаться к серверам с самоподписанными/ненадёжными сертификатами.';
 	@override String get preferGreyscale => 'Для e-ink экранов';
 	@override String get autoClearWhiteboardOnExit => 'Это будет синхронизировано с другими вашими устройствами';

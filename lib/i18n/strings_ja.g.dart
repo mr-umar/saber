@@ -392,6 +392,7 @@ class _TranslationsSettingsPrefLabelsJa extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => '安全でない接続を許可する';
 	@override String get editorToolbarAlignment => '編集ツールバーの位置調整';
 	@override String get editorToolbarShowInFullscreen => 'フルスクリーンモードで編集ツールバーを表示する';
+	@override String get editorStylusPointerEnabled => 'スタイラスポインター';
 	@override String get editorAutoInvert => 'ダークモードでメモを反転';
 	@override String get preferGreyscale => 'グレースケールを優先';
 	@override String get maxImageSize => '最大画像サイズ';
@@ -420,6 +421,7 @@ class _TranslationsSettingsPrefDescriptionsJa extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegibleは、弱視読者の読みやすさを向上させます。';
+	@override String get editorStylusPointerEnabled => 'スタイラスが画面に近いときに視覚ポインターを表示';
 	@override String get allowInsecureConnections => '(非推奨) Saber が自己署名/信頼できない証明書を持つサーバーに接続できるようにする';
 	@override String get preferGreyscale => 'e-inkディスプレイ用';
 	@override String get autoClearWhiteboardOnExit => '他のデバイスと同期されます';

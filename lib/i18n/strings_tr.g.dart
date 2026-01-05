@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsTr extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Güvensiz bağlantılara izin ver';
 	@override String get editorToolbarAlignment => 'Editör araç çubuğunun yerleşimi';
 	@override String get editorToolbarShowInFullscreen => 'Editör araç kutusunu tam ekranda göster';
+	@override String get editorStylusPointerEnabled => 'Stylus işaretçisi';
 	@override String get editorAutoInvert => 'Karanlık temada notların rengini tersine çevir';
 	@override String get preferGreyscale => 'Gri tonlamayı tercih et';
 	@override String get maxImageSize => 'Maksimum görsel boyutu';
@@ -422,6 +423,7 @@ class _TranslationsSettingsPrefDescriptionsTr extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible, görme sorunu yaşayanların okumasını kolaylaştıran bir fonttur';
+	@override String get editorStylusPointerEnabled => 'Stylus ekrana yakın olduğunda görsel işaretçi göster';
 	@override String get allowInsecureConnections => '(Önerilmez) Saber\'ın kendinden imzalı/güvensiz sertifika kullanan sunuculara bağlanmasına izin verir';
 	@override String get preferGreyscale => 'E-mürekkep ekranlar için';
 	@override String get autoClearWhiteboardOnExit => 'Diğer cihazlarınıza senkronize edilmeye devam edecek';

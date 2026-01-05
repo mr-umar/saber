@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsCs extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Povolit nezabezpečená připojení';
 	@override String get editorToolbarAlignment => 'Umístění nabídky editoru';
 	@override String get editorToolbarShowInFullscreen => 'Zobrazovat nabídku editoru v režimu celé obrazovky';
+	@override String get editorStylusPointerEnabled => 'Ukazatel stylusu';
 	@override String get editorAutoInvert => 'V tmavém režimu invertovat poznámky';
 	@override String get preferGreyscale => 'Preferovat černobílé barvy';
 	@override String get maxImageSize => 'Maximální velikost obrázku';
@@ -422,6 +423,7 @@ class _TranslationsSettingsPrefDescriptionsCs extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'Font Atkinson Hyperlegible zvyšuje čitelnost pro čtenáře se slabým zrakem';
+	@override String get editorStylusPointerEnabled => 'Zobrazit vizuální ukazatel, když je stylus blízko obrazovky';
 	@override String get allowInsecureConnections => '(Nedoporučuje se) Povolit aplikaci Saber připojovat se k serverům se samopodepsaným/nedůvěryhodným certifikátem.';
 	@override String get preferGreyscale => 'Pro elektronické čtečky knih s e-ink displejem';
 	@override String get autoClearWhiteboardOnExit => 'Bude synchronizováno do dalších zařízení';

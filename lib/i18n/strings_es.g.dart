@@ -69,7 +69,7 @@ class _TranslationsHomeEs extends TranslationsHomeEn {
 	@override late final _TranslationsHomeTooltipsEs tooltips = _TranslationsHomeTooltipsEs._(_root);
 	@override late final _TranslationsHomeCreateEs create = _TranslationsHomeCreateEs._(_root);
 	@override String get welcome => 'Te damos la bienvenida a Saber';
-	@override String get invalidFormat => 'El archivo que seleccionaste no es válido. Por favor, selecciona un archivo .sbn, .sbn2, .sba or .pdf.';
+	@override String get invalidFormat => 'El archivo que seleccionaste no es válido. Por favor, selecciona un archivo .sbn, .sbn2, .sba o .pdf.';
 	@override String get noFiles => 'No se ha encontrado ninguna nota';
 	@override String get createNewNote => 'Presiona el botón + para crear una nueva nota';
 	@override String get backFolder => 'Volver a la carpeta anterior';
@@ -117,7 +117,7 @@ class _TranslationsSettingsEs extends TranslationsSettingsEn {
 	@override String get autosaveDisabled => 'Nunca';
 	@override String get shapeRecognitionDisabled => 'Nunca';
 	@override String get openDataDir => 'Abrir carpeta Saber';
-	@override String get resyncEverything => 'Resync todo';
+	@override String get resyncEverything => 'Resincronizar todo';
 }
 
 // Path: logs
@@ -259,7 +259,7 @@ class _TranslationsHomeTooltipsEs extends TranslationsHomeTooltipsEn {
 
 	// Translations
 	@override String get newNote => 'Crear nota';
-	@override String get showUpdateDialog => 'Mostrar cuadro de diálogo de actualizaciónes';
+	@override String get showUpdateDialog => 'Mostrar cuadro de diálogo de actualizaciones';
 	@override String get exportNote => 'Exportar nota';
 }
 
@@ -285,7 +285,7 @@ class _TranslationsHomeNewFolderEs extends TranslationsHomeNewFolderEn {
 	@override String get folderName => 'Nombre de la carpeta';
 	@override String get create => 'Crear';
 	@override String get folderNameEmpty => 'El nombre de la carpeta no puede estar vacío';
-	@override String get folderNameContainsSlash => 'El nombre de la carpeta no puede contener una barra vertical';
+	@override String get folderNameContainsSlash => 'El nombre de la carpeta no puede contener una barra (/)';
 	@override String get folderNameExists => 'Ya existe una carpeta con este nombre';
 }
 
@@ -300,7 +300,7 @@ class _TranslationsHomeRenameNoteEs extends TranslationsHomeRenameNoteEn {
 	@override String get noteName => 'Nombre de la nota';
 	@override String get rename => 'Renombrar';
 	@override String get noteNameEmpty => 'El nombre de la nota no puede estar vacío';
-	@override String get noteNameContainsSlash => 'El nombre de la nota no puede contener una barra vertical';
+	@override String get noteNameContainsSlash => 'El nombre de la nota no puede contener una barra (/)';
 	@override String get noteNameExists => 'Ya existe una nota con este nombre';
 }
 
@@ -357,7 +357,7 @@ class _TranslationsSentryConsentEs extends TranslationsSentryConsentEn {
 	// Translations
 	@override late final _TranslationsSentryConsentDescriptionEs description = _TranslationsSentryConsentDescriptionEs._(_root);
 	@override late final _TranslationsSentryConsentAnswersEs answers = _TranslationsSentryConsentAnswersEs._(_root);
-	@override String get title => 'Ayudar a mejorar el sable?';
+	@override String get title => '¿Ayudar a mejorar Saber?';
 }
 
 // Path: settings.prefCategories
@@ -371,7 +371,7 @@ class _TranslationsSettingsPrefCategoriesEs extends TranslationsSettingsPrefCate
 	@override String get writing => 'Escritura';
 	@override String get editor => 'Editor';
 	@override String get advanced => 'Avanzado';
-	@override String get performance => 'Actuación';
+	@override String get performance => 'Rendimiento';
 }
 
 // Path: settings.prefLabels
@@ -392,6 +392,7 @@ class _TranslationsSettingsPrefLabelsEs extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Permitir conexiones inseguras';
 	@override String get editorToolbarAlignment => 'Alineación de la barra de herramientas del editor';
 	@override String get editorToolbarShowInFullscreen => 'Mostrar la barra de herramientas del editor en el modo de pantalla completa';
+	@override String get editorStylusPointerEnabled => 'Puntero del stylus';
 	@override String get editorAutoInvert => 'Invertir notas en el modo oscuro';
 	@override String get preferGreyscale => 'Preferir colores en escala de grises';
 	@override String get maxImageSize => 'Tamaño máximo de la imagen';
@@ -405,7 +406,7 @@ class _TranslationsSettingsPrefLabelsEs extends TranslationsSettingsPrefLabelsEn
 	@override String get printPageIndicators => 'Indicadores de página de impresión';
 	@override String get sentry => 'Informes de errores';
 	@override String get autosave => 'Auto-Save';
-	@override String get simplifiedHomeLayout => 'Disposición simplificada de la casa';
+	@override String get simplifiedHomeLayout => 'Diseño simplificado de inicio';
 	@override String get customDataDir => 'Directorio de datos personalizado';
 	@override String get autoStraightenLines => 'Líneas de enderezamiento automático';
 	@override String get shapeRecognitionDelay => 'Retraso en el reconocimiento de formas';
@@ -418,6 +419,7 @@ class _TranslationsSettingsPrefDescriptionsEs extends TranslationsSettingsPrefDe
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get editorStylusPointerEnabled => 'Muestra un puntero en la pantalla cuando se usa un stylus';
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible aumenta la legibilidad para lectores con poca visión';
 	@override String get allowInsecureConnections => '(No recomendado) Autorizar a Saber a conectarse a servidores con certificados autofirmados o no fiables';
 	@override String get preferGreyscale => 'Para pantallas con tinta electrónica';
@@ -611,7 +613,7 @@ class _TranslationsProfile$faq$0i3$Es extends TranslationsProfile$faq$0i3$En {
 
 	// Translations
 	@override String get q => '¿Cómo puedo eliminar mi cuenta?';
-	@override String get a => 'Pincha en el botón "${_root.profile.quickLinks.deleteAccount}", e inicia sesión si es necesario.\nSi estás usando el servidor oficial de Saber, tu cuenta se eliminará después de un periodo de una semana. Puedes contactar conmigo en la dirección adilhanney@disroot.org durante este tiempo para cancelar la eliminación.\nSi estás usando un servidor de terceros, puede ser que la opción de eliminar no exista: necesitas consultar la política de privacidad del servidor para más información.';
+	@override String get a => 'Presiona el botón "${_root.profile.quickLinks.deleteAccount}", e inicia sesión si es necesario.\nSi estás usando el servidor oficial de Saber, tu cuenta se eliminará después de un periodo de una semana. Puedes contactar conmigo en la dirección adilhanney@disroot.org durante este tiempo para cancelar la eliminación.\nSi estás usando un servidor de terceros, puede ser que la opción de eliminar no exista: necesitas consultar la política de privacidad del servidor para más información.';
 }
 
 // Path: editor.toolbar
@@ -630,7 +632,7 @@ class _TranslationsEditorToolbarEs extends TranslationsEditorToolbarEn {
 	@override String get undo => 'Deshacer';
 	@override String get redo => 'Rehacer';
 	@override String get export => 'Exportar (Ctrl Shift S)';
-	@override String get exportAs => 'Exportar cómo:';
+	@override String get exportAs => 'Exportar como:';
 	@override String get fullscreen => 'Pantalla completa (F11)';
 }
 
@@ -677,7 +679,7 @@ class _TranslationsEditorColorsEs extends TranslationsEditorColorsEn {
 	@override String get white => 'Blanco';
 	@override String get red => 'Rojo';
 	@override String get green => 'Verde';
-	@override String get cyan => 'Cyan';
+	@override String get cyan => 'Cian';
 	@override String get blue => 'Azul';
 	@override String get yellow => 'Amarillo';
 	@override String get purple => 'Morado';
@@ -781,6 +783,7 @@ class _TranslationsEditorHudEs extends TranslationsEditorHudEn {
 	@override String get lockSingleFingerPan => 'Deshabilitar la panorámica con un solo dedo';
 	@override String get unlockAxisAlignedPan => 'Desbloquear el desplazamiento a horizontal o vertical';
 	@override String get lockAxisAlignedPan => 'Bloquear el desplazamiento a horizontal o vertical';
+	@override String get fitToWidth => 'Ajustar al ancho';
 }
 
 // Path: sentry.consent.description
@@ -905,7 +908,7 @@ class _TranslationsEditorMenuBgPatternsEs extends TranslationsEditorMenuBgPatter
 	@override String get college => 'Rayado universitario';
 	@override String get collegeRtl => 'Rayado universitario (inverso)';
 	@override String get lined => 'Rayado';
-	@override String get grid => 'Cuadrículado';
+	@override String get grid => 'Cuadriculado';
 	@override String get dots => 'Punteado';
 	@override String get staffs => 'Pentagrama';
 	@override String get tablature => 'Tablatura';

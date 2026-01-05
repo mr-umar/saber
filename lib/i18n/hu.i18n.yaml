@@ -90,6 +90,7 @@ settings:
     shouldCheckForUpdates: Automatikusan ellenőrzi a Saber frissítéseket
     editorToolbarAlignment: A szerkesztő eszköztár igazítása
     editorToolbarShowInFullscreen: A szerkesztő eszköztár megjelenítése teljes képernyős módban
+    editorStylusPointerEnabled: Stylus mutató
     editorAutoInvert: Jegyzetek színének felcserélése sötét módban
     preferGreyscale: Szürkeárnyalatos színek előnyben részesítése
     maxImageSize: Maximális képméret
@@ -112,6 +113,7 @@ settings:
     disableEraserAfterUse(OUTDATED): A radír automatikus letiltása
   prefDescriptions: 
     hyperlegibleFont: Az Atkinson Hyperlegible növeli az olvashatóságot a gyengén látók számára
+    editorStylusPointerEnabled: Vizuális mutató megjelenítése, amikor a stylus közel van a képernyőhöz
     preferGreyscale: E-tinta kijelzőkhöz
     autoClearWhiteboardOnExit: Továbbra is szinkronizálva lesz a többi eszközzel
     maxImageSize: Az ennél nagyobb képek tömörítve lesznek

@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: Разрешить небезопасные соединения
     editorToolbarAlignment: Панель инструментов редактора
     editorToolbarShowInFullscreen: Показывать инструменты в полноэкранном режиме
+    editorStylusPointerEnabled: Указатель стилуса
     editorAutoInvert: Инвертировать заметки в тёмном режиме
     preferGreyscale: Предпочтение оттенкам серого
     maxImageSize: Макс. размер изображения
@@ -112,6 +113,7 @@ settings:
     sentry: Сообщить об ошибке
   prefDescriptions: 
     hyperlegibleFont: Шрифт Atkinson Hyperlegible повышает разборчивость для читателей с плохим зрением
+    editorStylusPointerEnabled: Показывать визуальный указатель, когда стилус находится рядом с экраном
     allowInsecureConnections: (Не рекомендуется) Разрешить Saber подключаться к серверам с самоподписанными/ненадёжными сертификатами.
     preferGreyscale: Для e-ink экранов
     autoClearWhiteboardOnExit: Это будет синхронизировано с другими вашими устройствами

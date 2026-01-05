@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: به اتصالات ناامن اجازه دهید
     editorToolbarAlignment: تراز کردن نوار ابزار ویرایشگر
     editorToolbarShowInFullscreen: نوار ابزار ویرایشگر را در حالت تمام صفحه نمایش دهید
+    editorStylusPointerEnabled: نشانگر قلم
     editorAutoInvert: معکوس کردن رنگ یادداشت ها در حالت تاریک
     preferGreyscale: رنگ های خاکستری را در اولویت قرار دهید
     maxImageSize: حداکثر اندازه تصویر
@@ -112,6 +113,7 @@ settings:
     autoStraightenLines(OUTDATED): صاف کردن خودکار خطوط
   prefDescriptions: 
     hyperlegibleFont: خوانایی را برای خوانندگان کم بینا افزایش می دهد
+    editorStylusPointerEnabled: نمایش نشانگر بصری زمانی که قلم نزدیک صفحه است
     allowInsecureConnections: (توصیه نمی شود) به Saber اجازه دهید به سرورهایی با گواهینامه های خودامضا/غیر قابل اعتماد متصل شود
     preferGreyscale: برای نمایشگر های e-ink
     autoClearWhiteboardOnExit: همچنان با دستگاه‌های دیگر شما همگام‌سازی می‌شود

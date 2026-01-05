@@ -393,6 +393,7 @@ class _TranslationsSettingsPrefLabelsFa extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'به اتصالات ناامن اجازه دهید';
 	@override String get editorToolbarAlignment => 'تراز کردن نوار ابزار ویرایشگر';
 	@override String get editorToolbarShowInFullscreen => 'نوار ابزار ویرایشگر را در حالت تمام صفحه نمایش دهید';
+	@override String get editorStylusPointerEnabled => 'نشانگر قلم';
 	@override String get editorAutoInvert => 'معکوس کردن رنگ یادداشت ها در حالت تاریک';
 	@override String get preferGreyscale => 'رنگ های خاکستری را در اولویت قرار دهید';
 	@override String get maxImageSize => 'حداکثر اندازه تصویر';
@@ -420,6 +421,7 @@ class _TranslationsSettingsPrefDescriptionsFa extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'خوانایی را برای خوانندگان کم بینا افزایش می دهد';
+	@override String get editorStylusPointerEnabled => 'نمایش نشانگر بصری زمانی که قلم نزدیک صفحه است';
 	@override String get allowInsecureConnections => '(توصیه نمی شود) به Saber اجازه دهید به سرورهایی با گواهینامه های خودامضا/غیر قابل اعتماد متصل شود';
 	@override String get preferGreyscale => 'برای نمایشگر های e-ink';
 	@override String get autoClearWhiteboardOnExit => 'همچنان با دستگاه‌های دیگر شما همگام‌سازی می‌شود';

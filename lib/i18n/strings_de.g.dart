@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsDe extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Unsichere Verbindung erlauben';
 	@override String get editorToolbarAlignment => 'Position der Werkzeugleiste';
 	@override String get editorToolbarShowInFullscreen => 'Zeige die Werkzeugleiste im Vollbild';
+	@override String get editorStylusPointerEnabled => 'Stift-Zeiger';
 	@override String get editorAutoInvert => 'Notizen im Dunkelmodus invertieren';
 	@override String get preferGreyscale => 'Graustufen bevorzugen';
 	@override String get maxImageSize => 'Maximale Bildgröße';

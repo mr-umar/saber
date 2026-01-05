@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsZhHansCn extends TranslationsSettingsPrefLa
 	@override String get allowInsecureConnections => '允许不安全的连接';
 	@override String get editorToolbarAlignment => '编辑工具栏对齐方式';
 	@override String get editorToolbarShowInFullscreen => '在全屏模式中显示编辑菜单栏';
+	@override String get editorStylusPointerEnabled => '触控笔指针';
 	@override String get editorAutoInvert => '在深色模式下使用反色笔记背景';
 	@override String get preferGreyscale => '使用灰度颜色';
 	@override String get maxImageSize => '最大图片大小';
@@ -422,6 +423,7 @@ class _TranslationsSettingsPrefDescriptionsZhHansCn extends TranslationsSettings
 
 	// Translations
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible 字体为低视力读者提高易读性';
+	@override String get editorStylusPointerEnabled => '当触控笔靠近屏幕时显示视觉指针';
 	@override String get allowInsecureConnections => '（不推荐）允许 Saber 连接到具有自签名/不受信任证书的服务器';
 	@override String get preferGreyscale => '用于电子墨水显示器';
 	@override String get autoClearWhiteboardOnExit => '这将会同步到您的其他设备';

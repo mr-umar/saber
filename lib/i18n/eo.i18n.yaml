@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: Permesu nesekurajn konektojn
     editorToolbarAlignment: Pozicio de ilobreto
     editorToolbarShowInFullscreen: Montru ilobreton en plenekranreĝimo
+    editorStylusPointerEnabled: Stilus montrilo
     editorAutoInvert: Inversigu notojn en malhelreĝimo
     preferGreyscale: Preferu grizkolorojn
     maxImageSize: Maksimuma bildgrandeco
@@ -112,6 +113,7 @@ settings:
     sentry: Erarraportado
   prefDescriptions: 
     hyperlegibleFont: Pliigas legeblecon por uzantoj kun malalta vidkapablo
+    editorStylusPointerEnabled: Montri videblan montrilon kiam la stilo estas proksima al la ekrano
     allowInsecureConnections: (Nerekomendita) Permesu al Sabero konektiĝi al serviloj kun mem-subskribitaj/nefidindaj atestiloj
     preferGreyscale: Por ekranoj de bitlegiloj
     autoClearWhiteboardOnExit: Malplenigas la tabulon post kiam vi foriras la aplikaĵon

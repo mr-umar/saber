@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsZhHantTw extends TranslationsSettingsPrefLa
 	@override String get allowInsecureConnections => '允許不安全的連結';
 	@override String get editorToolbarAlignment => '編輯器工具列的對齊方式';
 	@override String get editorToolbarShowInFullscreen => '在全螢幕模式中顯示編輯器工具列';
+	@override String get editorStylusPointerEnabled => '觸控筆指標';
 	@override String get editorAutoInvert => '在深色模式下使用反色筆記背景';
 	@override String get preferGreyscale => '使用灰度顏色';
 	@override String get maxImageSize => '最大圖片尺寸';
@@ -422,6 +423,7 @@ class _TranslationsSettingsPrefDescriptionsZhHantTw extends TranslationsSettings
 
 	// Translations
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible 字體為低視力讀者提高易讀性';
+	@override String get editorStylusPointerEnabled => '當觸控筆靠近螢幕時顯示視覺指標';
 	@override String get allowInsecureConnections => '（不推薦）允許Saber連結到具有自簽名/不受信任證書的伺服器';
 	@override String get preferGreyscale => '用於電子紙螢幕';
 	@override String get autoClearWhiteboardOnExit => '它仍會同步到您的其他裝置';

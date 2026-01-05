@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: Unsichere Verbindung erlauben
     editorToolbarAlignment: Position der Werkzeugleiste
     editorToolbarShowInFullscreen: Zeige die Werkzeugleiste im Vollbild
+    editorStylusPointerEnabled: Stift-Zeiger
     editorAutoInvert: Notizen im Dunkelmodus invertieren
     preferGreyscale: Graustufen bevorzugen
     maxImageSize: Maximale Bildgröße

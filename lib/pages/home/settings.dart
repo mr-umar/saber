@@ -486,6 +486,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   pref: stows.editorToolbarShowInFullscreen,
                 ),
                 SettingsSwitch(
+                  title: t.settings.prefLabels.editorStylusPointerEnabled,
+                  subtitle: t.settings.prefDescriptions.editorStylusPointerEnabled,
+                  icon: Icons.edit,
+                  pref: stows.editorStylusPointerEnabled,
+                ),
+                SettingsSwitch(
                   title: t.settings.prefLabels.editorAutoInvert,
                   iconBuilder: (b) {
                     return b ? Icons.invert_colors_on : Icons.invert_colors_off;

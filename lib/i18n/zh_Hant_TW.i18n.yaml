@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: 允許不安全的連結
     editorToolbarAlignment: 編輯器工具列的對齊方式
     editorToolbarShowInFullscreen: 在全螢幕模式中顯示編輯器工具列
+    editorStylusPointerEnabled: 觸控筆指標
     editorAutoInvert: 在深色模式下使用反色筆記背景
     preferGreyscale: 使用灰度顏色
     maxImageSize: 最大圖片尺寸
@@ -112,6 +113,7 @@ settings:
     autoDisableFingerDrawingWhenStylusDetected(OUTDATED): 自動禁用手指繪圖
   prefDescriptions: 
     hyperlegibleFont: Atkinson Hyperlegible 字體為低視力讀者提高易讀性
+    editorStylusPointerEnabled: 當觸控筆靠近螢幕時顯示視覺指標
     allowInsecureConnections: （不推薦）允許Saber連結到具有自簽名/不受信任證書的伺服器
     preferGreyscale: 用於電子紙螢幕
     autoClearWhiteboardOnExit: 它仍會同步到您的其他裝置

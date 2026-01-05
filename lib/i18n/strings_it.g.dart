@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsIt extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Consenti connessioni non sicure';
 	@override String get editorToolbarAlignment => 'Allineamento della barra degli strumenti dell\'editor';
 	@override String get editorToolbarShowInFullscreen => 'Mostra la barra degli strumenti dell\'editor in modalità a schermo intero';
+	@override String get editorStylusPointerEnabled => 'Puntatore dello stilo';
 	@override String get editorAutoInvert => 'Inverti le note in modalità scura';
 	@override String get preferGreyscale => 'Preferisci i colori in scala di grigi';
 	@override String get maxImageSize => 'Dimensione massima dell\'immagine';

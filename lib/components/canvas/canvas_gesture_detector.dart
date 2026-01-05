@@ -673,7 +673,7 @@ class CanvasGestureDetectorState extends State<CanvasGestureDetector> {
         ValueListenableBuilder<Offset?>(
           valueListenable: _hoverPosition,
           builder: (context, position, child) {
-            if (position == null) return const SizedBox.shrink();
+            if (position == null || !stows.editorStylusPointerEnabled.value) return const SizedBox.shrink();
             
             final color = switch (widget.currentTool) {
               final Pen pen => pen.color,

@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: Povolit nezabezpečená připojení
     editorToolbarAlignment: Umístění nabídky editoru
     editorToolbarShowInFullscreen: Zobrazovat nabídku editoru v režimu celé obrazovky
+    editorStylusPointerEnabled: Ukazatel stylusu
     editorAutoInvert: V tmavém režimu invertovat poznámky
     preferGreyscale: Preferovat černobílé barvy
     maxImageSize: Maximální velikost obrázku
@@ -112,6 +113,7 @@ settings:
     sentry: Hlášení chyb
   prefDescriptions: 
     hyperlegibleFont: Font Atkinson Hyperlegible zvyšuje čitelnost pro čtenáře se slabým zrakem
+    editorStylusPointerEnabled: Zobrazit vizuální ukazatel, když je stylus blízko obrazovky
     allowInsecureConnections: (Nedoporučuje se) Povolit aplikaci Saber připojovat se k serverům se samopodepsaným/nedůvěryhodným certifikátem.
     preferGreyscale: Pro elektronické čtečky knih s e-ink displejem
     autoClearWhiteboardOnExit: Bude synchronizováno do dalších zařízení

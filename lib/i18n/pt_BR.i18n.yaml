@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: Permitir conexões inseguras
     editorToolbarAlignment: Alinhamento da barra de ferramentas do editor
     editorToolbarShowInFullscreen: Mostrar a barra de ferramentas do editor no modo de tela cheia
+    editorStylusPointerEnabled: Ponteiro da caneta
     editorAutoInvert: Inverter as notas no modo escuro
     preferGreyscale: Preferir as cores em escala de cinza
     maxImageSize: Tamanho máximo da imagem
@@ -112,6 +113,7 @@ settings:
     recentColorsLength(OUTDATED): Quantas cores recentes armazenar
   prefDescriptions: 
     hyperlegibleFont: Atkinson Hyperlegible aumenta a legibilidade para leitores com baixa visão
+    editorStylusPointerEnabled: Mostrar ponteiro visual quando a caneta estiver próxima da tela
     allowInsecureConnections: (Não recomendado) Permitir que o Saber se conecte a servidores com certificados autoassinados/não-confiáveis
     preferGreyscale: Para telas e-ink
     autoClearWhiteboardOnExit: Ainda será sincronizado com seus outros dispositivos

@@ -92,6 +92,7 @@ settings:
     allowInsecureConnections: 安全でない接続を許可する
     editorToolbarAlignment: 編集ツールバーの位置調整
     editorToolbarShowInFullscreen: フルスクリーンモードで編集ツールバーを表示する
+    editorStylusPointerEnabled: スタイラスポインター
     editorAutoInvert: ダークモードでメモを反転
     preferGreyscale: グレースケールを優先
     maxImageSize: 最大画像サイズ
@@ -112,6 +113,7 @@ settings:
     disableEraserAfterUse(OUTDATED): 消しゴムを自動的に無効にする
   prefDescriptions: 
     hyperlegibleFont: Atkinson Hyperlegibleは、弱視読者の読みやすさを向上させます。
+    editorStylusPointerEnabled: スタイラスが画面に近いときに視覚ポインターを表示
     allowInsecureConnections: (非推奨) Saber が自己署名/信頼できない証明書を持つサーバーに接続できるようにする
     preferGreyscale: e-inkディスプレイ用
     autoClearWhiteboardOnExit: 他のデバイスと同期されます

@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: السماح بالاتصالات غير الآمنة
     editorToolbarAlignment: محاذاة شريط أدوات المحرر
     editorToolbarShowInFullscreen: أظهر شريط أدوات المحرر في وضع ملء الشاشة
+    editorStylusPointerEnabled: مؤشر القلم
     editorAutoInvert: اقلب الملاحظات في الوضع المظلم
     preferGreyscale: تفضيل الألوان الرمادية
     maxImageSize: الحجم الأقصى للصورة
@@ -112,6 +113,7 @@ settings:
     autosave(OUTDATED): تلقائي
   prefDescriptions: 
     hyperlegibleFont: يزيد Atkinson Hyperlegible من وضوح الرؤية للقراء الذين يعانون من ضعف في الرؤية
+    editorStylusPointerEnabled: إظهار مؤشر مرئي عندما يكون القلم بالقرب من الشاشة
     allowInsecureConnections: (غير موصى به) بالاتصال بالخوادم بشهادات غير موثوقة/موقعة ذاتيًا Saber السماح لـ
     preferGreyscale: لشاشات الحبر الإلكتروني
     autoClearWhiteboardOnExit: ستظل متزامنة مع أجهزتك الأخرى

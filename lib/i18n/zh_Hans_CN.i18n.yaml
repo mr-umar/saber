@@ -93,6 +93,7 @@ settings:
     allowInsecureConnections: 允许不安全的连接
     editorToolbarAlignment: 编辑工具栏对齐方式
     editorToolbarShowInFullscreen: 在全屏模式中显示编辑菜单栏
+    editorStylusPointerEnabled: 触控笔指针
     editorAutoInvert: 在深色模式下使用反色笔记背景
     preferGreyscale: 使用灰度颜色
     maxImageSize: 最大图片大小
@@ -112,6 +113,7 @@ settings:
     sentry: 错误报告
   prefDescriptions: 
     hyperlegibleFont: Atkinson Hyperlegible 字体为低视力读者提高易读性
+    editorStylusPointerEnabled: 当触控笔靠近屏幕时显示视觉指针
     allowInsecureConnections: （不推荐）允许 Saber 连接到具有自签名/不受信任证书的服务器
     preferGreyscale: 用于电子墨水显示器
     autoClearWhiteboardOnExit: 这将会同步到您的其他设备

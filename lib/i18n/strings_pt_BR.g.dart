@@ -393,6 +393,7 @@ class _TranslationsSettingsPrefLabelsPtBr extends TranslationsSettingsPrefLabels
 	@override String get allowInsecureConnections => 'Permitir conexões inseguras';
 	@override String get editorToolbarAlignment => 'Alinhamento da barra de ferramentas do editor';
 	@override String get editorToolbarShowInFullscreen => 'Mostrar a barra de ferramentas do editor no modo de tela cheia';
+	@override String get editorStylusPointerEnabled => 'Ponteiro da caneta';
 	@override String get editorAutoInvert => 'Inverter as notas no modo escuro';
 	@override String get preferGreyscale => 'Preferir as cores em escala de cinza';
 	@override String get maxImageSize => 'Tamanho máximo da imagem';
@@ -420,6 +421,7 @@ class _TranslationsSettingsPrefDescriptionsPtBr extends TranslationsSettingsPref
 
 	// Translations
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible aumenta a legibilidade para leitores com baixa visão';
+	@override String get editorStylusPointerEnabled => 'Mostrar ponteiro visual quando a caneta estiver próxima da tela';
 	@override String get allowInsecureConnections => '(Não recomendado) Permitir que o Saber se conecte a servidores com certificados autoassinados/não-confiáveis';
 	@override String get preferGreyscale => 'Para telas e-ink';
 	@override String get autoClearWhiteboardOnExit => 'Ainda será sincronizado com seus outros dispositivos';

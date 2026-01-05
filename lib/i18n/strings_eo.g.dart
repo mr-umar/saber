@@ -395,6 +395,7 @@ class _TranslationsSettingsPrefLabelsEo extends TranslationsSettingsPrefLabelsEn
 	@override String get allowInsecureConnections => 'Permesu nesekurajn konektojn';
 	@override String get editorToolbarAlignment => 'Pozicio de ilobreto';
 	@override String get editorToolbarShowInFullscreen => 'Montru ilobreton en plenekranreĝimo';
+	@override String get editorStylusPointerEnabled => 'Stilus montrilo';
 	@override String get editorAutoInvert => 'Inversigu notojn en malhelreĝimo';
 	@override String get preferGreyscale => 'Preferu grizkolorojn';
 	@override String get maxImageSize => 'Maksimuma bildgrandeco';
@@ -422,6 +423,7 @@ class _TranslationsSettingsPrefDescriptionsEo extends TranslationsSettingsPrefDe
 
 	// Translations
 	@override String get hyperlegibleFont => 'Pliigas legeblecon por uzantoj kun malalta vidkapablo';
+	@override String get editorStylusPointerEnabled => 'Montri videblan montrilon kiam la stilo estas proksima al la ekrano';
 	@override String get allowInsecureConnections => '(Nerekomendita) Permesu al Sabero konektiĝi al serviloj kun mem-subskribitaj/nefidindaj atestiloj';
 	@override String get preferGreyscale => 'Por ekranoj de bitlegiloj';
 	@override String get autoClearWhiteboardOnExit => 'Malplenigas la tabulon post kiam vi foriras la aplikaĵon';

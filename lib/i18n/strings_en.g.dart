@@ -605,6 +605,9 @@ class TranslationsSettingsPrefLabelsEn {
 	/// en: 'Show the toolbar in fullscreen mode'
 	String get editorToolbarShowInFullscreen => 'Show the toolbar in fullscreen mode';
 
+	/// en: 'Stylus pointer'
+	String get editorStylusPointerEnabled => 'Stylus pointer';
+
 	/// en: 'Invert notes in dark mode'
 	String get editorAutoInvert => 'Invert notes in dark mode';
 
@@ -664,6 +667,9 @@ class TranslationsSettingsPrefDescriptionsEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: 'Show a pointer on the screen when using a stylus'
+	String get editorStylusPointerEnabled => 'Show a pointer on the screen when using a stylus';
 
 	/// en: 'Increases legibility for users with low vision'
 	String get hyperlegibleFont => 'Increases legibility for users with low vision';
@@ -1298,6 +1304,9 @@ class TranslationsEditorHudEn {
 
 	/// en: 'Lock panning to horizontal or vertical'
 	String get lockAxisAlignedPan => 'Lock panning to horizontal or vertical';
+
+	/// en: 'Fit to width'
+	String get fitToWidth => 'Fit to width';
 }
 
 // Path: sentry.consent.description
