@@ -10,6 +10,7 @@ import 'package:saber/components/canvas/_stroke.dart';
 import 'package:saber/components/canvas/image/editor_image.dart';
 import 'package:saber/components/canvas/inner_canvas.dart';
 import 'package:saber/components/canvas/pencil_shader.dart';
+import 'package:saber/data/editor/editor_exporter.dart';
 import 'package:saber/data/tools/laser_pointer.dart';
 
 typedef CanvasKey = GlobalKey<State<InnerCanvas>>;
@@ -294,6 +295,19 @@ class EditorPage extends ChangeNotifier implements HasSize {
     super.dispose();
   }
 
+  /// [cloneForRasterization] creates some new resources that need to be
+  /// disposed, but it also contains some resources from the original page
+  /// that should not be disposed since they are still in use.
+  ///
+  /// Call this method instead of [dispose] to dispose only the resources
+  /// exclusive to the cloned page.
+  void disposeClonedData() {
+    quill.dispose();
+    _pencilShader?.dispose();
+    isRendered = false;
+    super.dispose();
+  }
+
   EditorPage copyWith({
     Size? size,
     List<Stroke>? strokes,
@@ -311,16 +325,18 @@ class EditorPage extends ChangeNotifier implements HasSize {
   /// Clones this page for use in a screenshot.
   ///
   /// Avoids bugs caused by the quill editor being attached to multiple
-  /// contexts.
-  EditorPage cloneForScreenshot() => copyWith(
-    quill: QuillStruct(
-      controller: QuillController(
-        document: Document.fromDelta(quill.controller.document.toDelta()),
-        selection: const TextSelection.collapsed(offset: 0),
-      ),
-      focusNode: QuillStruct._screenshotQuillFocusNode,
-    ),
-  );
+  /// contexts, and filters out strokes that shouldn't be rasterized.
+  ///
+  /// Make sure to call [disposeClonedData] on the returned page when
+  /// you're done with it.
+  EditorPage cloneForRasterization({bool rasterizeAllStrokes = false}) {
+    return copyWith(
+      strokes: rasterizeAllStrokes
+          ? strokes
+          : strokes.where(EditorExporter.shouldRasterizeStroke).toList(),
+      quill: quill.cloneForScreenshot(),
+    );
+  }
 }
 
 class QuillStruct {
@@ -336,7 +352,11 @@ class QuillStruct {
     controller.dispose();
   }
 
-  static final _screenshotQuillFocusNode = FocusNode(
-    debugLabel: 'Screenshot Quill Focus Node',
+  QuillStruct cloneForScreenshot() => QuillStruct(
+    controller: QuillController(
+      document: Document.fromDelta(controller.document.toDelta()),
+      selection: const TextSelection.collapsed(offset: 0),
+    ),
+    focusNode: FocusNode(debugLabel: 'Screenshot Quill Focus Node'),
   );
 }

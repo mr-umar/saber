@@ -12,15 +12,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart' as flutter_quill;
 import 'package:keybinder/keybinder.dart';
 import 'package:logging/logging.dart';
+import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart';
 import 'package:saber/components/canvas/_asset_cache.dart';
 import 'package:saber/components/canvas/_stroke.dart';
 import 'package:saber/components/canvas/canvas.dart';
 import 'package:saber/components/canvas/canvas_gesture_detector.dart';
 import 'package:saber/components/canvas/canvas_image.dart';
-import 'package:saber/components/canvas/canvas_preview.dart';
 import 'package:saber/components/canvas/image/editor_image.dart';
 import 'package:saber/components/canvas/save_indicator.dart';
+import 'package:saber/components/editor/read_only_banner.dart';
 import 'package:saber/components/theming/adaptive_alert_dialog.dart';
 import 'package:saber/components/theming/adaptive_icon.dart';
 import 'package:saber/components/theming/dynamic_material_app.dart';
@@ -99,7 +100,7 @@ class Editor extends StatefulWidget {
 class EditorState extends State<Editor> {
   final log = Logger('EditorState');
 
-  late var coreInfo = EditorCoreInfo(filePath: '');
+  late var coreInfo = EditorCoreInfo.placeholder;
 
   final _canvasGestureDetectorKey = GlobalKey<CanvasGestureDetectorState>();
   final _transformationController = TransformationController();
@@ -186,8 +187,8 @@ class EditorState extends State<Editor> {
   }
 
   void _initAsync() async {
-    coreInfo.filePath = await widget.initialPath;
-    filenameTextEditingController.text = coreInfo.fileName;
+    final filePath = await widget.initialPath;
+    filenameTextEditingController.text = p.basename(filePath);
 
     if (needsNaming) {
       filenameTextEditingController.selection = TextSelection(
@@ -196,17 +197,17 @@ class EditorState extends State<Editor> {
       );
     }
 
-    await _initStrokes();
+    await _loadCoreInfo(filePath);
 
     if (widget.pdfPath != null) {
       await importPdfFromFilePath(widget.pdfPath!);
     }
   }
 
-  Future _initStrokes() async {
-    coreInfo = await EditorCoreInfo.loadFromFilePath(coreInfo.filePath);
+  Future _loadCoreInfo(String filePath) async {
+    coreInfo = await EditorCoreInfo.loadFromFilePath(filePath);
     if (coreInfo.readOnly) {
-      log.info('Loaded file as read-only');
+      log.info('Loaded file as read-only: ${coreInfo.readOnlyReason}');
     }
 
     for (int pageIndex = 0; pageIndex < coreInfo.pages.length; pageIndex++) {
@@ -850,8 +851,10 @@ class EditorState extends State<Editor> {
     if (coreInfo.readOnly) return;
     if (!stows.loggedIn) return;
 
+    final relativeFilePath = coreInfo.filePath;
+    assert(relativeFilePath.isNotEmpty, 'Cannot refresh unnamed file');
     final syncFile = await SaberSyncFile.relative(
-      coreInfo.filePath + Editor.extension,
+      relativeFilePath + Editor.extension,
     );
 
     final bestFile = await SaberSyncInterface.getBestFile(
@@ -865,7 +868,7 @@ class EditorState extends State<Editor> {
     void listener(SaberSyncFile transferred) {
       if (transferred != syncFile) return;
       subscription.cancel();
-      _initStrokes();
+      _loadCoreInfo(relativeFilePath);
     }
 
     subscription = syncer.downloader.transferStream.listen(listener);
@@ -962,45 +965,17 @@ class EditorState extends State<Editor> {
     }
 
     if (!mounted) return;
-    final screenshotter = ScreenshotController();
     final page = coreInfo.pages.first;
     final previewHeight = page.previewHeight(lineHeight: coreInfo.lineHeight);
     final thumbnailSize = Size(720, 720 * previewHeight / page.size.width);
-    final theme = ThemeData(
-      brightness: .light,
-      colorScheme: const ColorScheme.light(
-        primary: EditorExporter.primaryColor,
-        secondary: EditorExporter.secondaryColor,
-      ),
-    );
-    final thumbnail = await screenshotter.captureFromWidget(
-      MediaQuery(
-        data: MediaQueryData(size: thumbnailSize),
-        child: Theme(
-          data: theme,
-          child: DefaultTextStyle(
-            style: theme.textTheme.bodyMedium!,
-            child: Localizations.override(
-              context: context,
-              child: SizedBox(
-                width: thumbnailSize.width,
-                height: thumbnailSize.height,
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topLeft,
-                  child: pageBuilderForScreenshot(
-                    context,
-                    pageIndex: 0,
-                    previewHeight: previewHeight,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      pixelRatio: 1,
+    final thumbnail = await EditorExporter.screenshotPage(
+      coreInfo: coreInfo,
+      pageIndex: 0,
+      screenshotController: ScreenshotController(),
+      rasterizeAllStrokes: true,
       targetSize: thumbnailSize,
+      cropHeight: previewHeight,
+      pixelRatio: 1,
     );
     await FileManager.writeFile(
       // Note that this ends with .sbn2.p
@@ -1019,7 +994,7 @@ class EditorState extends State<Editor> {
   }
 
   Future<void> _renameFileNow() async {
-    final newName = filenameTextEditingController.text;
+    final newName = filenameTextEditingController.text.trim();
     if (newName == coreInfo.fileName) return;
 
     if (_filenameFormKey.currentState?.validate() ??
@@ -1051,9 +1026,7 @@ class EditorState extends State<Editor> {
 
   String? _validateFilenameTextField(String? newName) {
     if (newName == null) return null;
-    if (newName.isEmpty) return t.home.renameNote.noteNameEmpty;
-    if (newName.contains('/')) return t.home.renameNote.noteNameContainsSlash;
-    return null;
+    return FileManager.validateFilename(newName);
   }
 
   void updateColorBar(Color color) {
@@ -1380,7 +1353,7 @@ class EditorState extends State<Editor> {
           page: coreInfo.pages[pageIndex],
           pageIndex: 0,
           textEditing: false,
-          coreInfo: EditorCoreInfo.empty,
+          coreInfo: EditorCoreInfo.placeholder,
           currentStroke: null,
           currentStrokeDetectedShape: null,
           currentSelection: null,
@@ -1393,21 +1366,12 @@ class EditorState extends State<Editor> {
       transformationController: _transformationController,
     );
 
-    final Widget? readonlyBanner = coreInfo.readOnlyBecauseOfVersion
-        ? Collapsible(
-            collapsed:
-                !(coreInfo.readOnly && coreInfo.readOnlyBecauseOfVersion),
-            axis: CollapsibleAxis.vertical,
-            child: SafeArea(
-              child: ListTile(
-                onTap: askUserToDisableReadOnly,
-                title: Text(t.editor.newerFileFormat.readOnlyMode),
-                subtitle: Text(t.editor.newerFileFormat.title),
-                trailing: const Icon(Icons.edit_off),
-              ),
-            ),
-          )
-        : null;
+    final readonlyBanner = ReadOnlyBanner(
+      coreInfo.readOnlyReason,
+      action: coreInfo.readOnlyReason == .versionTooNew
+          ? showVersionTooNewDialog
+          : null,
+    );
 
     final Widget toolbar = Collapsible(
       axis: isToolbarVertical
@@ -1605,7 +1569,7 @@ class EditorState extends State<Editor> {
             child: Column(
               children: [
                 Expanded(child: canvas),
-                if (readonlyBanner != null) readonlyBanner,
+                readonlyBanner,
               ],
             ),
           ),
@@ -1620,7 +1584,7 @@ class EditorState extends State<Editor> {
         children: [
           Expanded(child: canvas),
           toolbar,
-          if (readonlyBanner != null) readonlyBanner,
+          readonlyBanner,
         ],
       );
     }
@@ -1803,16 +1767,18 @@ class EditorState extends State<Editor> {
             const Duration(seconds: 5),
             (_) => _refreshCurrentNote(),
           );
-          coreInfo.readOnlyBecauseWatchingServer |= !coreInfo.readOnly;
-          if (!coreInfo.readOnly) setState(() => coreInfo.readOnly = true);
+          if (coreInfo.readOnlyReason != .watchingServer) {
+            assert(coreInfo.readOnlyReason == null);
+            coreInfo.readOnlyReason = .watchingServer;
+            if (mounted) setState(() {});
+          }
         } else {
           _watchServerTimer?.cancel();
           _watchServerTimer = null;
-          if (coreInfo.readOnlyBecauseWatchingServer)
-            setState(() {
-              coreInfo.readOnly = false;
-              coreInfo.readOnlyBecauseWatchingServer = false;
-            });
+          if (coreInfo.readOnlyReason == .watchingServer) {
+            coreInfo.readOnlyReason = null;
+            if (mounted) setState(() {});
+          }
         }
       },
     );
@@ -1856,22 +1822,6 @@ class EditorState extends State<Editor> {
       },
       currentTool: currentTool,
       currentScale: _transformationController.value.approxScale,
-    );
-  }
-
-  Widget pageBuilderForScreenshot(
-    BuildContext context, {
-    required int pageIndex,
-    double? previewHeight,
-  }) {
-    final page = this.coreInfo.pages[pageIndex].cloneForScreenshot();
-    previewHeight ??= page.previewHeight(lineHeight: this.coreInfo.lineHeight);
-    final coreInfo = this.coreInfo.copyWith(pages: [page]);
-    return CanvasPreview(
-      pageIndex: pageIndex,
-      height: previewHeight,
-      coreInfo: coreInfo,
-      highQuality: true,
     );
   }
 
@@ -2000,20 +1950,20 @@ class EditorState extends State<Editor> {
     autosaveAfterDelay();
   }
 
-  Future askUserToDisableReadOnly() async {
+  Future<void> showVersionTooNewDialog() async {
     final disableReadOnly =
         await showDialog(
           context: context,
           builder: (context) => AdaptiveAlertDialog(
-            title: Text(t.editor.newerFileFormat.title),
-            content: Text(t.editor.newerFileFormat.subtitle),
+            title: Text(t.editor.versionTooNew.title),
+            content: Text(t.editor.versionTooNew.subtitle),
             actions: [
               CupertinoDialogAction(
                 child: Text(t.common.cancel),
                 onPressed: () => Navigator.pop(context, false),
               ),
               CupertinoDialogAction(
-                child: Text(t.editor.newerFileFormat.allowEditing),
+                child: Text(t.editor.versionTooNew.allowEditing),
                 onPressed: () => Navigator.pop(context, true),
               ),
             ],
@@ -2024,9 +1974,10 @@ class EditorState extends State<Editor> {
     if (!mounted) return;
     if (!disableReadOnly) return;
 
-    setState(() {
-      coreInfo.readOnly = false;
-    });
+    if (coreInfo.readOnlyReason == .versionTooNew) {
+      coreInfo.readOnlyReason = null;
+      if (mounted) setState(() {});
+    }
   }
 
   late int _lastCurrentPageIndex = coreInfo.initialPageIndex ?? 0;

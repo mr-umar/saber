@@ -20,6 +20,7 @@ class InnerCanvas extends StatefulWidget {
     this.redrawPageListenable,
     required this.width,
     required this.height,
+    this.showPageIndicator = true,
     this.isPreview = false,
     this.isPrint = false,
     this.textEditing = false,
@@ -37,6 +38,10 @@ class InnerCanvas extends StatefulWidget {
   final Listenable? redrawPageListenable;
   final double width;
   final double height;
+
+  /// Controls whether page indicators can be shown for this canvas.
+  /// In preview/print modes this may still be disabled.
+  final bool showPageIndicator;
 
   final bool isPreview;
   final bool isPrint;
@@ -141,7 +146,7 @@ class _InnerCanvasState extends State<InnerCanvas> {
                 currentSelection: widget.currentSelection,
                 primaryColor: colorScheme.primary,
                 page: page,
-                showPageIndicator:
+                showPageIndicator: widget.showPageIndicator &&
                     !widget.isPreview &&
                     (!widget.isPrint || stows.printPageIndicators.value),
                 pageIndex: widget.pageIndex,
