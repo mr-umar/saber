@@ -273,6 +273,11 @@ class FileManager {
 
     writeFuture = writeFuture.then((_) => afterWrite());
     if (awaitWrite) await writeFuture;
+    
+    if (stows.fileSyncAlreadyDeleted.value.contains(filePath)) {
+      stows.fileSyncAlreadyDeleted.value.remove(filePath);
+      stows.fileSyncAlreadyDeleted.notifyListeners();
+    }
   }
 
   static Future<void> createFolder(String folderPath) async {
@@ -407,6 +412,13 @@ class FileManager {
     syncer.uploader.enqueueRel(fromPath);
     syncer.uploader.enqueueRel(toPath);
 
+    stows.fileSyncAlreadyDeleted.value.add(fromPath);
+    stows.fileSyncAlreadyDeleted.notifyListeners();
+    if (stows.fileSyncAlreadyDeleted.value.contains(toPath)) {
+      stows.fileSyncAlreadyDeleted.value.remove(toPath);
+      stows.fileSyncAlreadyDeleted.notifyListeners();
+    }
+
     _renameReferences(fromPath, toPath);
     broadcastFileWrite(FileOperationType.delete, fromPath);
     broadcastFileWrite(FileOperationType.write, toPath);
@@ -453,7 +465,11 @@ class FileManager {
     if (!file.existsSync()) return;
     await file.delete();
 
-    if (alsoUpload) syncer.uploader.enqueueRel(filePath);
+    if (alsoUpload) {
+      syncer.uploader.enqueueRel(filePath);
+      stows.fileSyncAlreadyDeleted.value.add(filePath);
+      stows.fileSyncAlreadyDeleted.notifyListeners();
+    }
 
     _removeReferences(filePath);
     broadcastFileWrite(FileOperationType.delete, filePath);
@@ -536,7 +552,16 @@ class FileManager {
       _renameReferences(fromPath + child, toPath + child);
       broadcastFileWrite(FileOperationType.delete, fromPath + child);
       broadcastFileWrite(FileOperationType.write, toPath + child);
+
+      syncer.uploader.enqueueRel(fromPath + child);
+      syncer.uploader.enqueueRel(toPath + child);
+
+      stows.fileSyncAlreadyDeleted.value.add(fromPath + child);
+      if (stows.fileSyncAlreadyDeleted.value.contains(toPath + child)) {
+        stows.fileSyncAlreadyDeleted.value.remove(toPath + child);
+      }
     }
+    stows.fileSyncAlreadyDeleted.notifyListeners();
   }
 
   static Future deleteDirectory(

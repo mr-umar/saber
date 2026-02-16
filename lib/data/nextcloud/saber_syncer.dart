@@ -95,6 +95,7 @@ class SaberSyncInterface
             final locallyDeleted = stows.fileSyncAlreadyDeleted.value.contains(
               syncFile.relativeLocalPath,
             );
+            if (locallyDeleted && !syncFile.localFile.existsSync()) break;
             if (remotelyDeleted && locallyDeleted) break;
 
             return syncFile;
