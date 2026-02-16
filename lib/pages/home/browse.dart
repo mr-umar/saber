@@ -159,6 +159,8 @@ class _BrowsePageState extends State<BrowsePage> {
             const SliverPadding(padding: .only(bottom: 16)),
             GridFolders(
               isAtRoot: path?.isEmpty ?? true,
+              currentPath: path ?? '/',
+              onRefresh: findChildrenOfPath,
               crossAxisCount: crossAxisCount,
               onTap: onDirectoryTap,
               createFolder: createFolder,

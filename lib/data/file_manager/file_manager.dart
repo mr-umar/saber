@@ -500,7 +500,20 @@ class FileManager {
   static Future renameDirectory(String directoryPath, String newName) async {
     directoryPath = _sanitisePath(directoryPath);
 
-    final directory = Directory(documentsDirectory + directoryPath);
+    final String newPath =
+        directoryPath.substring(0, directoryPath.lastIndexOf('/') + 1) +
+        newName;
+    
+    await moveDirectory(directoryPath, newPath);
+  }
+
+  static Future moveDirectory(String fromPath, String toPath) async {
+    fromPath = _sanitisePath(fromPath);
+    toPath = _sanitisePath(toPath);
+
+    if (fromPath == toPath) return;
+
+    final directory = Directory(documentsDirectory + fromPath);
     if (!directory.existsSync()) return;
 
     /// recursively find children of [directory] for [_renameReferences]
@@ -511,15 +524,18 @@ class FileManager {
       }
     }
 
-    final String newPath =
-        directoryPath.substring(0, directoryPath.lastIndexOf('/') + 1) +
-        newName;
-    await directory.rename(documentsDirectory + newPath);
+    // Ensure parent directory exists
+    final parentPath = toPath.substring(0, toPath.lastIndexOf('/'));
+    if (parentPath.isNotEmpty) {
+      await Directory(documentsDirectory + parentPath).create(recursive: true);
+    }
+
+    await directory.rename(documentsDirectory + toPath);
 
     for (final child in children) {
-      _renameReferences(directoryPath + child, newPath + child);
-      broadcastFileWrite(FileOperationType.delete, directoryPath + child);
-      broadcastFileWrite(FileOperationType.write, newPath + child);
+      _renameReferences(fromPath + child, toPath + child);
+      broadcastFileWrite(FileOperationType.delete, fromPath + child);
+      broadcastFileWrite(FileOperationType.write, toPath + child);
     }
   }
 
