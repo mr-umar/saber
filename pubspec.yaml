@@ -15,11 +15,11 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.30.0+130000
+version: 1.31.1+131010
 
 environment:
   sdk: ">=3.10.0 <4.0.0"
-  flutter: ">=3.38.2"
+  flutter: ">=3.41.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -102,7 +102,7 @@ dependencies:
 
   archive: ^4.0.3
 
-  receive_sharing_intent: ^1.6.7
+  flutter_sharing_intent: ^2.0.4
 
   onyxsdk_pen:
     path: packages/onyxsdk_pen
@@ -180,13 +180,6 @@ dev_dependencies:
   golden_screenshot: ^10.0.0
 
   sentry_dart_plugin: ^3.1.1
-
-dependency_overrides:
-  # https://github.com/KasemJaffer/receive_sharing_intent/pull/333
-  receive_sharing_intent:
-    git:
-      url: https://github.com/KasemJaffer/receive_sharing_intent
-      ref: 2cea396843cd3ab1b5ec4334be4233864637874e
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
